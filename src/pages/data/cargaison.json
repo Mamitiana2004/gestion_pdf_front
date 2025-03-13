@@ -1,0 +1,54 @@
+[
+    {
+        "id":1,
+        "voyage_id": 1,
+        "port_depart": "NAKANOSEKI",
+        "date_depart": "2024-12-15",
+        "shipper": "ITOCHU CORPORATION",
+        "consignee": "OCEAN TRADE",
+        "bl_no": "18006794623",
+        "produit": "Véhicules Mazda neufs",
+        "description_produit": "39 unités de véhicules Mazda neufs",
+        "poid": 65640.00,
+        "volume": 571.65
+    },
+    {
+        "id":2,
+        "voyage_id": 1,
+        "port_depart": "NAKANOSEKI",
+        "date_depart": "2024-12-15",
+        "shipper": "ITOCHU CORPORATION",
+        "consignee": "OCEAN TRADE",
+        "bl_no": "18006794624",
+        "produit": "Pièces détachées automobiles",
+        "description_produit": "20 unités de pièces détachées automobiles",
+        "poid": 30000.00,
+        "volume": 250.50
+    },
+    {
+        "id":3,
+        "voyage_id": 2,
+        "port_depart": "SHANGHAI",
+        "date_depart": "2025-01-10",
+        "shipper": "SHANGHAI INDUSTRIAL CO.",
+        "consignee": "OCEAN TRADE",
+        "bl_no": "19006794624",
+        "produit": "Machines industrielles",
+        "description_produit": "50 unités de machines industrielles",
+        "poid": 75000.00,
+        "volume": 600.50
+    },
+    {
+        "id":4,
+        "voyage_id": 2,
+        "port_depart": "SHANGHAI",
+        "date_depart": "2025-01-10",
+        "shipper": "SHANGHAI INDUSTRIAL CO.",
+        "consignee": "OCEAN TRADE",
+        "bl_no": "19006794625",
+        "produit": "Générateurs électriques",
+        "description_produit": "30 unités de générateurs électriques",
+        "poid": 45000.00,
+        "volume": 300.75
+    }
+]

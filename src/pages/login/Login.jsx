@@ -21,33 +21,33 @@ export default function Login() {
         }
         let url = `${process.env.REACT_APP_API_URL}/users/login`;   
         
-        fetch(url,{
-            method:"POST",
-            headers:{
-                "Content-Type" : "application/json"
-            },
-            body:JSON.stringify(data)
-        })
-        .then((res)=>{
-            return res.json();
-        })
-        .then((data)=>{
-            if (data.detail) {
-                toast.current.show({
-                    severity: "error",
-                    summary: "Error",
-                    detail: data.detail,
-                    life: 3000
-                });    
-            }
-            else{     
-                localStorage.setItem("token_user",data.token);
-                navigate("/home");
-            }
-        })
-        .catch((error)=>{
-            console.log(error);
-        });
+        // fetch(url,{
+        //     method:"POST",
+        //     headers:{
+        //         "Content-Type" : "application/json"
+        //     },
+        //     body:JSON.stringify(data)
+        // })
+        // .then((res)=>{
+        //     return res.json();
+        // })
+        // .then((data)=>{
+        //     if (data.detail) {
+        //         toast.current.show({
+        //             severity: "error",
+        //             summary: "Error",
+        //             detail: data.detail,
+        //             life: 3000
+        //         });    
+        //     }
+        //     else{     
+        //         localStorage.setItem("token_user",data.token);
+        //     }
+        // })
+        // .catch((error)=>{
+        //     console.log(error);
+        // });
+        navigate("/admin/vessel");
         
 
     }

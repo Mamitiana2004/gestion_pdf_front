@@ -1,7 +1,6 @@
 import style from './Sidebar.module.css';
 import { useEffect, useState } from 'react';
 import chevron from './images/chevronright.svg';
-import bookmark from './images/bookmark.svg';
 import logout from './images/logout.svg';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,9 +39,24 @@ export default function Sidebar(props) {
 
     return(
         <div className={sidebarClass}>
-            <a href='/admin/categorie' className={props.active==="categorie" ? style.sidebar_item_active : style.sidebar_item}>
-                <img className={style.sidebar_icon} src={bookmark} alt="bookmark" />
-                <span className={style.sidebar_item_label}>Cargaison</span>
+            <a href='/admin/utilisateur' className={props.active==="utilisateur" ? style.sidebar_item_active : style.sidebar_item}>
+                <i className='pi pi-chart-bar'/>
+                <span className={style.sidebar_item_label}>Dashboard</span>
+                <img className={style.chevron} src={chevron} alt=">" />
+            </a>
+            <a href='/admin/utilisateur' className={props.active==="utilisateur" ? style.sidebar_item_active : style.sidebar_item}>
+                <i className='pi pi-user'/>
+                <span className={style.sidebar_item_label}>Utilisateur</span>
+                <img className={style.chevron} src={chevron} alt=">" />
+            </a>
+            <a href='/admin/data' className={props.active==="utilisateur" ? style.sidebar_item_active : style.sidebar_item}>
+                <i className='pi pi-database'/>
+                <span className={style.sidebar_item_label}>Data</span>
+                <img className={style.chevron} src={chevron} alt=">" />
+            </a>
+            <a href='/admin/recherche' className={props.active==="utilisateur" ? style.sidebar_item_active : style.sidebar_item}>
+                <i className='pi pi-search'/>
+                <span className={style.sidebar_item_label}>Recherche</span>
                 <img className={style.chevron} src={chevron} alt=">" />
             </a>
 
