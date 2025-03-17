@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePageTitle from "../hooks/usePageTitle";
 import Sidebar from "../layouts/Sidebar";
 import Topbar from "../layouts/Topbar";
@@ -19,6 +19,7 @@ import FileInput from "../components/FileInput";
 import { Calendar } from "primereact/calendar";
 import { Divider } from "primereact/divider";
 import { ProgressSpinner } from "primereact/progressspinner";
+import { Toast } from "primereact/toast";
 export default function Vessel() {
     usePageTitle("Vessel")
     const [sidebarStatut, setSidebarStatut] = useState(1);
@@ -32,6 +33,7 @@ export default function Vessel() {
     }
 
     const [vesselVoyage, setVesselVoyage] = useState();
+    const toast = useRef(null);
 
     const [filters, setFilters] = useState({
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
@@ -135,10 +137,15 @@ export default function Vessel() {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                setLoading(true)
+                toast.current.show({ severity: 'success', summary: 'Success', detail: 'Pdf importe', life: 3000 });
+
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                toast.current.show({ severity: 'error', summary: 'Erreur', detail: 'Pdf non insere , erreur du serveur', life: 3000 });
+                console.log(error)
+            })
             .finally(() => setLoading(false))
+            setVisibleImport(false)
     }
 
 
@@ -203,64 +210,69 @@ export default function Vessel() {
     };
 
 
-    if (!loading) {
-        return (
-            <>
-                <Topbar onMenuClick={changeStatut} />
-                <Sidebar statut={sidebarStatut} />
+    return (
 
-                <Dialog visible={visibleImport} onHide={() => setVisibleImport(false)} header="Import PDF" footer={<Button onClick={sendDataPdf} label="Valider" />}>
-                    <div className={style.pdf_container}>
-                        <FileInput fileValue={setPdfFile} />
-                    </div>
-                </Dialog>
-                <div className={style.container}>
-                    <div className={style.wrapper}>
-                        <h1>Vessel</h1>
-                        <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
-                        <DataTable filters={filters} expandedRows={expandedRows} rowExpansionTemplate={voyageTemplate} onRowToggle={(e) => setExpandedRows(e.data)} style={{ width: "100%" }} value={vesselVoyage}
-                            paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                            paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} vessel" >
-                            <Column expander={allowExpansion} style={{ width: '5rem' }} />
-                            <Column field="id" header="ID" ></Column>
-                            <Column filter filterPlaceholder="Search by name" field="name" header="Name" ></Column>
-                            <Column filter filterPlaceholder="Search by flag" field="flag" header="flag" ></Column>
-                        </DataTable>
-                    </div>
+        <>
+            {
+                !loading ?
+                    <>
+                        <Topbar onMenuClick={changeStatut} />
+                        <Sidebar statut={sidebarStatut} />
 
-                </div>
+                        <Dialog visible={visibleImport} onHide={() => setVisibleImport(false)} header="Import PDF" footer={<Button onClick={sendDataPdf} label="Valider" />}>
+                            <div className={style.pdf_container}>
+                                <FileInput fileValue={setPdfFile} />
+                            </div>
+                        </Dialog>
+                        <div className={style.container}>
+                            <div className={style.wrapper}>
+                                <h1>Vessel</h1>
+                                <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
+                                <DataTable filters={filters} expandedRows={expandedRows} rowExpansionTemplate={voyageTemplate} onRowToggle={(e) => setExpandedRows(e.data)} style={{ width: "100%" }} value={vesselVoyage}
+                                    paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} vessel" >
+                                    <Column expander={allowExpansion} style={{ width: '5rem' }} />
+                                    <Column field="id" header="ID" ></Column>
+                                    <Column filter filterPlaceholder="Search by name" field="name" header="Name" ></Column>
+                                    <Column filter filterPlaceholder="Search by flag" field="flag" header="flag" ></Column>
+                                </DataTable>
+                            </div>
 
-                {
-                    visibleCargo ?
-                        <Dialog visible={visibleCargo} onHide={() => setVisibleCargo(false)} maximized={true} header={`Cargaison du voyage`}>
-                            <span>Détails du voyage </span>
-                            <p>Vessel : {cargo.vessel.name}</p>
-                            <p>Flag : {cargo.vessel.flag}</p>
-                            <p>Voyage : {cargo.voyage.code}</p>
-                            <p>Date of sail : {formatDate(cargo.voyage.date_arrive)}</p>
-                            <Divider />
-                            <DataTable filters={filterCargo} style={{ width: '100%' }} value={cargo.cargos}>
-                                <Column filter field="bl_no" header="BL/No" />
-                                <Column filter field="port_depart" header="Port de depart" />
-                                <Column filter field="date_depart" header="Date de depart" />
-                                <Column filter field="shipper" header="Shipper" />
-                                <Column filter field="consignee" header="Consignee" />
-                                <Column filter field="produit" header="Good" />
-                                <Column filter field="description_produit" header="Description" />
-                                <Column filter dataType="numeric" field="poid" header="Weight" />
-                                <Column filter dataType="numeric" field="volume" header="Measurement" />
-                            </DataTable>
-                        </Dialog> : <></>
-                }
+                        </div>
 
-                <ConfirmDialog />
-            </>
-        )
-    }
-    else{
-        return <div style={{width:"100vw",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
-            <ProgressSpinner />
-        </div>
-    }
+                        {
+                            visibleCargo ?
+                                <Dialog visible={visibleCargo} onHide={() => setVisibleCargo(false)} maximized={true} header={`Cargaison du voyage`}>
+                                    <span>Détails du voyage </span>
+                                    <p>Vessel : {cargo.vessel.name}</p>
+                                    <p>Flag : {cargo.vessel.flag}</p>
+                                    <p>Voyage : {cargo.voyage.code}</p>
+                                    <p>Date of sail : {formatDate(cargo.voyage.date_arrive)}</p>
+                                    <Divider />
+                                    <DataTable filters={filterCargo} style={{ width: '100%' }} value={cargo.cargos}>
+                                        <Column filter field="bl_no" header="BL/No" />
+                                        <Column filter field="port_depart" header="Port de depart" />
+                                        <Column filter field="date_depart" header="Date de depart" />
+                                        <Column filter field="shipper" header="Shipper" />
+                                        <Column filter field="consignee" header="Consignee" />
+                                        <Column filter field="produit" header="Good" />
+                                        <Column filter field="description_produit" header="Description" />
+                                        <Column filter dataType="numeric" field="poid" header="Weight" />
+                                        <Column filter dataType="numeric" field="volume" header="Measurement" />
+                                    </DataTable>
+                                </Dialog> : <></>
+                        }
+
+                        <ConfirmDialog />
+                    </> :
+                    <>
+                        <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <ProgressSpinner />
+                        </div>
+                    </>
+            }
+            <Toast ref={toast} />
+        </>
+    )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePageTitle from "../hooks/usePageTitle";
 import style from './home.module.css'
 import Topbar from "../layouts/Topbar";
@@ -14,8 +14,9 @@ export default function Recherche() {
     usePageTitle("Recherche")
     const [loading, setLoading] = useState(false);
     const [affichePDF, setAffichagePDF] = useState(false);
-    const [selected,setSelected] = useState(null);
-    const [page,setPage] = useState(0);
+    const [selected, setSelected] = useState(null);
+    const [page, setPage] = useState(0);
+    const toast = useRef(null);
 
     const [sidebarStatut, setSidebarStatut] = useState(1);
     const changeStatut = () => {
@@ -42,8 +43,8 @@ export default function Recherche() {
             .then((res) => res.json())
             .then((data) => setPdf(data.resultat))
             .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
         setResultContenu([])
-        setLoading(false)
     }
 
     const searchByContenu = () => {
@@ -52,7 +53,7 @@ export default function Recherche() {
             .then((res) => res.json())
             .then((data) => { setResultContenu(assembler(data, pdf)); console.log() })
             .catch((error) => console.error(error))
-            setLoading(false)
+            .finally(() => setLoading(false));
     }
 
 
@@ -67,7 +68,7 @@ export default function Recherche() {
 
             })
             .catch((error) => console.error(error))
-        setLoading(false)
+            .finally(() => setLoading(false));
     }
 
     useEffect(() => {
@@ -101,15 +102,15 @@ export default function Recherche() {
             })
             .catch((error) => {
                 console.error("Error downloading file:", error);
-            });
-        setLoading(false)
+            })
+            .finally(() => setLoading(false));
         setAffichagePDF(true)
     };
-    
+
     const viewPDFContenu = (item) => {
+        setLoading(true)
         setSelected(item)
         setPage(item.pages[0])
-        setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/pdf/${item.nom_serveur}`, { method: "GET" })
             .then((response) => {
                 if (!response.ok) {
@@ -124,8 +125,8 @@ export default function Recherche() {
             })
             .catch((error) => {
                 console.error("Error downloading file:", error);
-            });
-        setLoading(false)
+            })
+            .finally(() => setLoading(false));
         setAffichagePDF(true)
     };
 
@@ -220,56 +221,60 @@ export default function Recherche() {
 
     const header = () => {
         return <>
-            <InputText placeholder="Nom du pdf" id="Nom" value={nom} onChange={(e) => setNom(e.target.value)} /> <Button icon="pi pi-search" onClick={() => searchByName()} />
+            <InputText placeholder="Nom du pdf" id="Nom" val ue={nom} onChange={(e) => setNom(e.target.value)} /> <Button icon="pi pi-search" onClick={() => searchByName()} />
         </>
     }
+    return (
+        <>
+            {
+                !loading ?
+                    <>
+                        <Topbar onMenuClick={changeStatut} />
+                        <Sidebar statut={sidebarStatut} />
+                        <div className={style.container}>
+                            <div className={style.wrapper}>
+                                <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
+                                <DataView header={header()} paginator rows={3} value={resultContenu.length > 0 ? resultContenu : pdf} listTemplate={list_contenu_template} itemTemplate={contenuTemplate} style={{ width: "100%" }} />
+                            </div>
+                        </div>
+                        <Dialog header="Voir le pdf" visible={affichePDF} onHide={() => setAffichagePDF(false)} maximized={true}>
+                            {pdfURL && resultContenu.length === 0 ?
+                                <iframe
+                                    src={pdfURL}
+                                    width="100%"
+                                    height="100%"
+                                    title="PDF Viewer"
+                                />
+                                :
+                                <></>}
+                            {pdfURL && selected && resultContenu.length > 0 ?
+                                <>
+                                    <p>Voir à la page : <div style={{display:"flex",gap:10}}>{selected.pages.map((p, i) => {
+                                        return <Button key={i} onClick={() => setPage(p)} label={p}></Button>
+                                    })}</div></p>
 
-    if (!loading) {
+                                    <iframe
+                                        key={page}
+                                        id="pdfViewer"
+                                        src={`${pdfURL}#page=${page}`}
+                                        width="100%"
+                                        height="100%"
+                                        title="PDF Viewer"
+                                    />
+                                </>
+                                :
+                                <></>}
+                        </Dialog>
+                    </>
+                    :
+                    <>
+                        <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <ProgressSpinner />
+                        </div>
+                    </>
+            }
+        </>
+    )
 
-        return (
-            <>
-                <Topbar onMenuClick={changeStatut} />
-                <Sidebar statut={sidebarStatut} />
-                <div className={style.container}>
-                    <div className={style.wrapper}>
-                        <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
-                        <DataView header={header()} paginator rows={3} value={resultContenu.length > 0 ? resultContenu : pdf} listTemplate={list_contenu_template} itemTemplate={contenuTemplate} style={{ width: "100%" }} />
-                    </div>
-                </div>
-                <Dialog header="Voir le pdf" visible={affichePDF} onHide={() => setAffichagePDF(false)} maximized={true}>
-                    {pdfURL  && resultContenu.length === 0 ?
-                        <iframe
-                            src={pdfURL}
-                            width="100%"
-                            height="100%"
-                            title="PDF Viewer"
-                        />
-                        :
-                        <></>}
-                    {pdfURL && selected && resultContenu.length > 0 ?
-                        <>  
-                            <p>Voir à la page : {selected.pages.map((p,i)=>{
-                                return <button key={i} onClick={()=>setPage(p)}>{p}</button>
-                            })}</p>
 
-                            <iframe
-                                key={page}
-                                id="pdfViewer"
-                                src={`${pdfURL}#page=${page}`}
-                                width="100%"
-                                height="100%"
-                                title="PDF Viewer"
-                            />
-                        </>
-                        :
-                        <></>}
-                </Dialog>
-            </>
-        )
-    }
-    else {
-        return <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <ProgressSpinner />
-        </div>
-    }
 }

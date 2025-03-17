@@ -15,11 +15,11 @@ export default function Login() {
 
     const login = (event) => {
         event.preventDefault();
-        let data = {
-            identifiant:identifiant,
-            password:password
-        }
-        let url = `${process.env.REACT_APP_API_URL}/users/login`;   
+        // let data = {
+        //     identifiant:identifiant,
+        //     password:password
+        // }
+        // let url = `${process.env.REACT_APP_API_URL}/users/login`;   
         
         // fetch(url,{
         //     method:"POST",
