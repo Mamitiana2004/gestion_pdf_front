@@ -6,8 +6,8 @@ import usePageTitle from '../../hooks/usePageTitle';
 export default function Login() {
 
     const toast = useRef();
-    const [identifiant, setIdentifiant] = useState("");
-    const [password, setPassword] = useState("");
+    const [identifiant, setIdentifiant] = useState("admin");
+    const [password, setPassword] = useState("admin");
 
     usePageTitle("Login");
     const navigate = useNavigate();
@@ -15,39 +15,39 @@ export default function Login() {
 
     const login = (event) => {
         event.preventDefault();
-        // let data = {
-        //     identifiant:identifiant,
-        //     password:password
-        // }
-        // let url = `${process.env.REACT_APP_API_URL}/users/login`;   
+        let data = {
+            identifiant:identifiant,
+            password:password
+        }
+        let url = `${process.env.REACT_APP_API_URL}/users/login`;   
         
-        // fetch(url,{
-        //     method:"POST",
-        //     headers:{
-        //         "Content-Type" : "application/json"
-        //     },
-        //     body:JSON.stringify(data)
-        // })
-        // .then((res)=>{
-        //     return res.json();
-        // })
-        // .then((data)=>{
-        //     if (data.detail) {
-        //         toast.current.show({
-        //             severity: "error",
-        //             summary: "Error",
-        //             detail: data.detail,
-        //             life: 3000
-        //         });    
-        //     }
-        //     else{     
-        //         localStorage.setItem("token_user",data.token);
-        //     }
-        // })
-        // .catch((error)=>{
-        //     console.log(error);
-        // });
-        navigate("/admin/stat");
+        fetch(url,{
+            method:"POST",
+            headers:{
+                "Content-Type" : "application/json"
+            },
+            body:JSON.stringify(data)
+        })
+        .then((res)=>{
+            return res.json();
+        })
+        .then((data)=>{
+            if (data.detail) {
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: data.detail,
+                    life: 3000
+                });    
+            }
+            else{     
+                navigate("/admin/stat");    
+                localStorage.setItem("token_user",data.token);
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
         
 
     }

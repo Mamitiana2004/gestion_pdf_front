@@ -176,6 +176,8 @@ export default function Utilisateur() {
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} vessel" >
                         <Column sortable field="id" header="ID" ></Column>
                         <Column filter filterPlaceholder="Search by identifiant" field="identifiant" header="Identifiant" ></Column>
+                        <Column field="date_login" header="Derniere connexion" ></Column>
+                        <Column field="date_create" header="Date de creation" ></Column>
                         <Column body={actionTemplate} ></Column>
                     </DataTable>
                 </div>
