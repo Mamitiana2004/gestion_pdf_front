@@ -176,7 +176,7 @@ export default function Vessel() {
     const leftToolbarTemplate = () => {
         return (
             <div className={style.toolbar_left}>
-                <Button style={{ width: "200px" }} label="Import PDF" icon="pi pi-download" severity="help" onClick={() => setVisibleImport(true)} />
+            <Button style={{ width: "200px" }} label="Import PDF" icon="pi pi-download" severity="help" onClick={() => setVisibleImport(true)} />
             </div>
         );
     };

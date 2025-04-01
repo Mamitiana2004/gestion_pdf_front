@@ -47,7 +47,7 @@ export default function Login() {
         // .catch((error)=>{
         //     console.log(error);
         // });
-        navigate("/admin/data");
+        navigate("/admin/stat");
         
 
     }
@@ -55,9 +55,6 @@ export default function Login() {
     return (
         <>
             <div className={style.container}>
-                <div className={style.login_left}>
-                </div>
-
                 <div className={style.login_right}>
                     <div className={style.login_title_container}>
                         <span className={style.login_title}>Login</span>

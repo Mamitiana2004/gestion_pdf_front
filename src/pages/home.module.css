@@ -1,16 +1,18 @@
 .container{
     position: absolute;
     top: 80px;
-    left: 245px;
+    left: 0;
     overflow-x: hidden;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-self: stretch;
     gap: 10px;
-    width: calc(100vw - 260px);
+    width: 100vw;
     height: calc(100vh - 80px);
 }
+
+.container_title{}
 
 .wrapper{
     display: flex;

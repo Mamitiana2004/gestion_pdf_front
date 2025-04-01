@@ -12,12 +12,12 @@
     color: var(--text-dark-pri);
     z-index: 20;
     transition: all 0.7s;
-}
+}   
 
 
 .wrapper{
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     background-color: var(--color-1);
     box-shadow:  0px 2px 4px rgba(0, 0, 0, 0.15);
     width: 100%;
@@ -36,12 +36,12 @@
     align-items: center;
     justify-content: flex-start;
     gap: 20px;
-    font-size: 32px;
     transition: all 0.7s;
 }
 
 
 .nav_icon{
+    display: none;
     position: relative;
     width: 24px;
     height: 24px;
@@ -52,41 +52,10 @@
 }
 
 .nav_title{
+    font-size: 32px;
     position: relative;
-    letter-spacing: 0.2px;
-    font-weight: 800;
-    transition: all 0.7s;   
-}
-
-
-.search_bar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    flex: 1;
-    border-radius: 16px;
-    background-color: #f9f9f9;
-    overflow: hidden;
-    padding: 16px;
-    gap: 10px;
-    color: #bdbdbd;
-    transition: all 0.7s;
-}
-
-
-.search_input{
-    border: none;
-    background: none;
     font-weight: 600;
-    width: 100%;
-    font-family: 'Montserrat';
-    transition: all 0.7s;
-}
-
-.search-input::placeholder{
-    flex: 1;
-    color: #bdbdbd;
+    transition: all 0.7s;   
 }
 
 .button_menu {
@@ -108,14 +77,43 @@
     transition: all 0.7s;
 }
 
-
-.nav_link{
-    font-family: 'Montserrat';
+.nav_link_active{
     position: relative;
-    text-decoration: underline;
+    display: flex;
+    background-color: var(--color-2);
+    border-radius: 100px;
+    gap: 10px;
+    text-decoration: none;
     color: var(--text-dark-pri);
     line-height: 19.6px;
-    font-weight: 700;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.7s;
+}
+
+.nav_link{
+    position: relative;
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-dark-pri);
+    line-height: 19.6px;
+    padding: 16px 10px;
+    cursor: pointer;
+    transition: all 0.7s;
+}
+
+.nav_link_inverse{
+    position: relative;
+    display: flex;
+    gap: 10px;
+    text-decoration: none;
+    color: #000;
+    background-color: white;
+    border-radius: 10px;
+    line-height: 19.6px;
+    padding: 10px 16px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.7s;
 }

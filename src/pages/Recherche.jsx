@@ -1,14 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import usePageTitle from "../hooks/usePageTitle";
-import style from './home.module.css'
+import style from './pdf.module.css'
 import Topbar from "../layouts/Topbar";
-import Sidebar from "../layouts/Sidebar";
 import { Toolbar } from "primereact/toolbar";
-import { InputText } from "primereact/inputtext";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
 import { ProgressSpinner } from "primereact/progressspinner";
 import { Dialog } from "primereact/dialog";
+import { SpeedDial } from 'primereact/speeddial';
+import { Tooltip } from "primereact/tooltip";
+import FileInput from "../components/FileInput";
+import { Dropdown } from "primereact/dropdown";
+import { Toast } from "primereact/toast";
+
+import { Sidebar } from 'primereact/sidebar';
 
 export default function Recherche() {
     usePageTitle("Recherche")
@@ -16,17 +21,41 @@ export default function Recherche() {
     const [affichePDF, setAffichagePDF] = useState(false);
     const [selected, setSelected] = useState(null);
     const [page, setPage] = useState(0);
+
+    const [visibleImport, setVisibleImport] = useState(false);
+
+    const [pdfFile, setPdfFile] = useState(null);
+
     const toast = useRef(null);
 
-    const [sidebarStatut, setSidebarStatut] = useState(1);
-    const changeStatut = () => {
-        if (sidebarStatut === 1) {
-            setSidebarStatut(0);
+    const [sidebarVisible, setSidebarVisible] = useState(false);
+
+
+    const [sortOrder, setSortOrder] = useState(0);
+    const [sortField, setSortField] = useState('');
+
+    const [sortKey, setSortKey] = useState('');
+
+    const sortOption = [
+        { label: 'A à Z', value: 'nom' },
+        { label: 'Z à A', value: '!nom' }
+    ]
+
+
+    const onSortChange = (event) => {
+        const value = event.value;
+
+        if (value.indexOf('!') === 0) {
+            setSortOrder(-1);
+            setSortField(value.substring(1, value.length));
+            setSortKey(value);
+        } else {
+            setSortOrder(1);
+            setSortField(value);
+            setSortKey(value);
         }
-        else {
-            setSidebarStatut(1);
-        }
-    }
+    };
+
 
     const [pdf, setPdf] = useState([{
         id: 0, nom: "", nom_serveur: ""
@@ -41,7 +70,9 @@ export default function Recherche() {
         setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_name?text=${nom}`, { method: "GET" })
             .then((res) => res.json())
-            .then((data) => setPdf(data.resultat))
+            .then(data => {
+                setPdf(data.resultat)
+            })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
         setResultContenu([])
@@ -63,8 +94,29 @@ export default function Recherche() {
         fetch(`${process.env.REACT_APP_API_URL}/api/pdf/getAll`, { method: "GET" })
             .then((res) => res.json())
             .then((data) => {
-                setPdf(data.data);
-                console.log(data.data);
+                let donnee = [];
+                data.data.map((d) => {
+                    donnee.push({
+                        ...d,
+                        items: [
+                            {
+                                label: "Voir le Pdf",
+                                icon: "pi pi-eye",
+                                command: () => {
+                                    viewPDF(d.nom_serveur, d.nom)
+                                }
+                            },
+                            // {
+                            //     label: 'Supprimer',
+                            //     icon: "pi pi-trash",
+                            //     command: () => {
+
+                            //     }
+                            // }
+                        ]
+                    })
+                });
+                setPdf(donnee)
 
             })
             .catch((error) => console.error(error))
@@ -79,11 +131,15 @@ export default function Recherche() {
     const leftToolbarTemplate = () => {
         return (
             <div className={style.toolbar_left}>
-                <InputText placeholder="Contenu" id="Contenu" value={contenu} onChange={(e) => setContenu(e.target.value)} />
-                <Button onClick={() => searchByContenu()} icon="pi pi-search" />
+                <Button icon="pi pi-plus" onClick={() => setVisibleImport(true)} className={style.button_import} label="Ajouter un nouveau document" />
+                <Dropdown style={{ width: "200px" }} options={sortOption} value={sortKey} optionLabel="label" placeholder="Trier par nom" onChange={onSortChange} />
             </div>
         );
     };
+
+    const rightToolbarTemplate = () => {
+        return <Button onClick={() => setSidebarVisible(true)} className={style.button_import} icon="pi pi-search" label="Recherche" />
+    }
 
     const [pdfURL, setPdfURL] = useState("");
     const viewPDF = (name, nom_file) => {
@@ -134,40 +190,54 @@ export default function Recherche() {
     const contenuTemplate = (item, index) => {
         if (resultContenu.length > 0) {
             return (
-                <div key={index} className={style.contenu_wrapper}>
-                    <div className={style.contenu_left}>
-                        <i style={{ fontSize: '80px' }} className="pi pi-file-pdf" />
+                <div key={index} className={style.pdf_container}>
+                    <div className={style.pdf_title}>
+                        <i className="pi pi-file-pdf" />
+                        <span className={style.contenu_title}>{item.nom}.pdf</span>
                     </div>
-                    <div className={style.contenu_right}>
-                        <div className={style.contenu_detail}>
-                            <span className={style.contenu_title}>{item.nom}.pdf</span>
-                            <div className={style.contenu_detail_label}>
-                                <span>Ce contenu est disponible dans ce pdf à la PageLinks : <b>{item.pages.map(page => {
-                                    return page + " ,"
-                                })}</b></span>
-                            </div>
+                    <div className={style.pdf_detail_container}>
+                        <span className={style.pdf_detail_title}>Detail</span>
+                        <div className={style.pdf_detail}>
+                            <span>Le contenu <b>{contenu}</b> est disponible dans ce pdf.</span>
                         </div>
-                        <Button icon="pi pi-download" onClick={() => viewPDFContenu(item)} className={style.contenu_download_btn} label="Voir le PDF" />
+                        <br />
+                        <Button icon="pi pi-eye" onClick={() => viewPDFContenu(item)} className={style.pdf_detail_button} label="Voir le document PDF   " />
                     </div>
                 </div>
             );
         }
         else {
             return (
-                <div key={index} className={style.contenu_wrapper}>
-                    <div className={style.contenu_left}>
-                        <i style={{ fontSize: '80px' }} className="pi pi-file-pdf" />
+                <div key={index} className={style.pdf_container}>
+                    <SpeedDial
+                        pt={{
+                            menuitem: ({ state }) => ({
+                                className: style.menu_item_pdf
+                            })
+                        }}
+                        buttonClassName={style.menu_button_btn}
+                        showIcon="pi pi-cog"
+                        hideIcon="pi pi-times"
+                        transitionDelay={80}
+                        id="detail"
+                        className={style.menu_button}
+                        model={item.items}
+                        direction="down"
+                    />
+
+
+                    <div className={style.pdf_title}>
+                        <i className="pi pi-file-pdf" />
+                        <span className={style.contenu_title}>{item.nom}.pdf</span>
                     </div>
-                    <div className={style.contenu_right}>
-                        <div className={style.contenu_detail}>
-                            <span className={style.contenu_title}>{item.nom}.pdf</span>
-                            <div className={style.contenu_detail_label}>
-                                <span>Vessel : <b>Indisponible</b></span>
-                                <span>Voyage : <b>Indisponible</b></span>
-                                <span>Nombre de page : <b>Indisponible</b></span>
-                            </div>
+                    <div className={style.pdf_detail_container}>
+                        <span className={style.pdf_detail_title}>Detail</span>
+                        <div className={style.pdf_detail}>
+                            <span>Date d'ajout : <b>Indisponible</b></span>
+                            <span>Nombre de page : <b>Indisponible</b></span>
                         </div>
-                        <Button icon="pi pi-download" onClick={() => viewPDF(item.nom_serveur, item.nom)} className={style.contenu_download_btn} label="Voir le PDF" />
+                        <br />
+                        <Button icon="pi pi-database" onClick={() => viewPDF(item.nom_serveur, item.nom)} className={style.pdf_detail_button} label="Voir les données   " />
                     </div>
                 </div>
             );
@@ -219,49 +289,60 @@ export default function Recherche() {
         return resultatFinal;
     }
 
-    const header = () => {
-        return <>
-            <InputText placeholder="Nom du pdf" id="Nom" val ue={nom} onChange={(e) => setNom(e.target.value)} /> <Button icon="pi pi-search" onClick={() => searchByName()} />
-        </>
+
+
+    const sendDataPdf = (e) => {
+        e.preventDefault();
+        setLoading(true)
+        const formData = new FormData();
+        formData.append("file", pdfFile);
+        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/import`, {
+            method: "POST",
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                toast.current.show({ severity: 'success', summary: 'Success', detail: 'Pdf importe', life: 3000 });
+
+            })
+            .catch(error => {
+                toast.current.show({ severity: 'error', summary: 'Erreur', detail: 'Pdf non insere , erreur du serveur', life: 3000 });
+                console.log(error)
+            })
+            .finally(() => setLoading(false))
+        setVisibleImport(false)
     }
+
     return (
         <>
             {
                 !loading ?
                     <>
-                        <Topbar onMenuClick={changeStatut} />
-                        <Sidebar statut={sidebarStatut} />
+                        <Topbar name="pdf"/>
+                        <Tooltip target="#detail .p-speeddial-action" position="left" />
+                        <Dialog draggable={false} visible={visibleImport} onHide={() => setVisibleImport(false)} header="Importer un nouveau PDF" footer={<Button onClick={sendDataPdf} className={style.import_pdf} label="Ajouter ce document" />}>
+                            <FileInput fileValue={setPdfFile} />
+                        </Dialog>
                         <div className={style.container}>
+                            <span className={style.container_title}>Document PDF</span>
+                            <span className={style.container_subtitle}>
+                                Les documents PDF seront stocker et traiter ici
+                            </span>
+                            <hr />
                             <div className={style.wrapper}>
-                                <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
-                                <DataView header={header()} paginator rows={3} value={resultContenu.length > 0 ? resultContenu : pdf} listTemplate={list_contenu_template} itemTemplate={contenuTemplate} style={{ width: "100%" }} />
+                                <Toolbar right={rightToolbarTemplate} className={style.toolbar_container} left={leftToolbarTemplate} style={{ width: "100%" }} />
+                                <DataView sortField={sortField} sortOrder={sortOrder} paginator rows={8} value={resultContenu.length > 0 ? resultContenu : pdf} listTemplate={list_contenu_template} itemTemplate={contenuTemplate} style={{ width: "100%" }} />
                             </div>
                         </div>
                         <Dialog header="Voir le pdf" visible={affichePDF} onHide={() => setAffichagePDF(false)} maximized={true}>
-                            {pdfURL && resultContenu.length === 0 ?
+                            {pdfURL ?
                                 <iframe
                                     src={pdfURL}
                                     width="100%"
                                     height="100%"
                                     title="PDF Viewer"
                                 />
-                                :
-                                <></>}
-                            {pdfURL && selected && resultContenu.length > 0 ?
-                                <>
-                                    <p>Voir à la page : <div style={{display:"flex",gap:10}}>{selected.pages.map((p, i) => {
-                                        return <Button key={i} onClick={() => setPage(p)} label={p}></Button>
-                                    })}</div></p>
-
-                                    <iframe
-                                        key={page}
-                                        id="pdfViewer"
-                                        src={`${pdfURL}#page=${page}`}
-                                        width="100%"
-                                        height="100%"
-                                        title="PDF Viewer"
-                                    />
-                                </>
                                 :
                                 <></>}
                         </Dialog>
@@ -273,6 +354,30 @@ export default function Recherche() {
                         </div>
                     </>
             }
+
+            <Sidebar
+                position="right"
+                visible={sidebarVisible}
+                onHide={() => setSidebarVisible(false)}
+            >
+
+                <div className={style.search_container}>
+                    <span className={style.search_container_title}>Recherche</span>
+                    <div className={style.search_item}>
+                        <span className={style.search_item_label}>Contenu</span>
+                        <input value={contenu} onChange={(e) => setContenu(e.target.value)} className={style.search_item_input} placeholder="Rechercher par contenu" type="text" />
+                        <button onClick={() => { setSidebarVisible(false); searchByContenu() }} className={style.search_item_button}>Rechercher</button>
+                    </div>
+                    <div className={style.search_item}>
+                        <span className={style.search_item_label}>Nom du document</span>
+                        <input value={nom} onChange={(e) => setNom(e.target.value)} className={style.search_item_input} placeholder="Rechercher par nom du PDF" type="text" />
+                        <button onClick={() => { setSidebarVisible(false); searchByName() }} className={style.search_item_button}>Rechercher</button>
+                    </div>
+                </div>
+
+            </Sidebar>
+
+            <Toast ref={toast} />
         </>
     )
 

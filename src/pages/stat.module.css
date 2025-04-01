@@ -1,0 +1,49 @@
+.container{
+    position: absolute;
+    top: 80px;
+    left: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 100px;
+    justify-content: flex-start;
+    align-self: stretch;
+    gap: 10px;
+    width: 100vw;
+    height: calc(100vh - 80px);
+}
+
+.container_title{
+    font-weight: 600;
+    font-size: 24px;
+}
+.container_subtitle{
+    color: #8d8d8d;
+}
+
+.wrapper{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+
+.card_chart{
+    width: 800px;
+    border: 2px solid #eaeaea;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card_chart span{
+    font-size: 24px;
+    font-weight: 600;
+}

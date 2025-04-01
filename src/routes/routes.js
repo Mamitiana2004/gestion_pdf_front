@@ -22,7 +22,7 @@ const routes = [
 
 const protected_routes = [
     {
-        path:"/admin/manifest",
+        path:"/admin/stat",
         element:<Manifest/>
     },
     {
@@ -34,7 +34,7 @@ const protected_routes = [
         element:<Vessel/>
     },
     {
-        path:"/admin/recherche",
+        path:"/admin/pdf",
         element:<Recherche/>
     }
 ]

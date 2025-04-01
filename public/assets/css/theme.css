@@ -1,42 +1,36 @@
-:root {
-
-    --color-1: #945244;
-    --opacity-fade-color-1: #94524471;
-    --opacity-100-color-1: #844234;
-    --opacity-70-color-1: #945244B2;
-    --opacity-50-color-1: #94524480;
-    --opacity-30-color-1: #9452444D;
-    --opacity-10-color-1: #9452441A;
-
-    --color-2: #519BDF;
-    --opacity-fade-color-2: #519BDF71;
-    --opacity-100-color-2: #3986CD;
-    --opacity-70-color-2: #519BDFB2;
-    --opacity-50-color-2: #519BDF80;
-    --opacity-30-color-2: #519BDF4D;
-    --opacity-10-color-2: #519BDF1A;
-
-    --color-3: #EFD701;
-    --opacity-fade-color-3: #EFD70171;
-    --opacity-100-color-3: #DEC806;
-    --opacity-70-color-3: #EFD701B2;
-    --opacity-50-color-3: #EFD70180;
-    --opacity-30-color-3: #EFD7014D;
-    --opacity-10-color-3: #EFD7011A;
-
-    --color-4: #C50000;
-    --opacity-fade-color-4: #C5000071;
-    --opacity-100-color-4: #B60505;
-    --opacity-70-color-4: #C50000B2;
-    --opacity-50-color-4: #C5000080;
-    --opacity-30-color-4: #C500004D;
-    --opacity-10-color-4: #C500001A;
-
-    --color-5: #CED7C2;
-    --opacity-fade-color-5: #CED7C271;
-    --opacity-100-color-5: #BEC8B2;
-    --opacity-70-color-5: #CED7C2B2;
-    --opacity-50-color-5: #CED7C280;
-    --opacity-30-color-5: #CED7C24D;
-    --opacity-10-color-5: #CED7C21A;
+:root{
+    --color-1: #481A95;
+    --opacity-100-color-1: #3A0F83;
+    --opacity-70-color-1: #481A95B2;
+    --opacity-50-color-1: #481A9580;
+    --opacity-30-color-1: #481A954D;
+    --opacity-10-color-1: #481A951A;
+    
+    --color-2: #C539B5;
+    --opacity-100-color-2: #B529A6;
+    --opacity-70-color-2: #C539B5B2;
+    --opacity-50-color-2: #C539B580;
+    --opacity-30-color-2: #C539B54D;
+    --opacity-10-color-2: #C539B51A;
+    
+    --color-3: #01D0EF;
+    --opacity-100-color-3: #03B0CA;
+    --opacity-70-color-3: #01D0EFB2;
+    --opacity-50-color-3: #01D0EF80;
+    --opacity-30-color-3: #01D0EF4D;
+    --opacity-10-color-3: #01D0EF1A;
+    
+    --color-4: #4D5723;
+    --opacity-100-color-4: #404918;
+    --opacity-70-color-4: #4D5723B2;
+    --opacity-50-color-4: #4D572380;
+    --opacity-30-color-4: #4D57234D;
+    --opacity-10-color-4: #4D57231A;
+    
+    --color-5: #D7C2D0;
+    --opacity-100-color-5: #C1A9BA;
+    --opacity-70-color-5: #D7C2D0B2;
+    --opacity-50-color-5: #D7C2D080;
+    --opacity-30-color-5: #D7C2D04D;
+    --opacity-10-color-5: #D7C2D01A;
 }

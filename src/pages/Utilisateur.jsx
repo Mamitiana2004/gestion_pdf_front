@@ -14,15 +14,6 @@ import { FilterMatchMode } from "primereact/api";
 
 export default function Utilisateur() {
     usePageTitle("Utilisateur")
-    const [sidebarStatut, setSidebarStatut] = useState(1);
-    const changeStatut = () => {
-        if (sidebarStatut === 1) {
-            setSidebarStatut(0);
-        }
-        else {
-            setSidebarStatut(1);
-        }
-    }
 
     const [filters, setFilters] = useState({
         identifiant: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
@@ -174,8 +165,7 @@ export default function Utilisateur() {
 
     return (
         <>
-            <Topbar onMenuClick={changeStatut} />
-            <Sidebar statut={sidebarStatut} />
+            <Topbar name="utilisateur" />
             <div className={style.container}>
                 <div className={style.wrapper}>
                     <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />

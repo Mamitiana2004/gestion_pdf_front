@@ -43,9 +43,9 @@ export default function FileInput(props) {
                 <i className="pi pi-file-pdf" />
                 <i style={{ display: "none" }} className="pi pi-pdf" />
                 <div id="instruction" style={fileInput.instruction}>
-                    <b>Choose a file</b>
-                    <span> or </span>
-                    <b>Drag here</b>
+                    <b>Choisir un fichier</b>
+                    <span> ou </span>
+                    <b>Deplacer ici</b>
                 </div>
                 <div style={{ ...fileInput.instruction, display: "none" }} id="infoCSV">
                     <b>{fileName}</b>
