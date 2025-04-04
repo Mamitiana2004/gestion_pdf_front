@@ -1,0 +1,664 @@
+{
+    "vessel": {
+        "name": "F59_PRIMROSE_ACE",
+        "flag": "LIBERIA",
+        "id": 1
+    },
+    "voyage": {
+        "id": 1,
+        "date_arrive": "2025-01-04",
+        "vessel_id": 1,
+        "code": "0157A_FEAEAF001"
+    },
+    "cargo": [
+        {
+            "cargo": {
+                "id": 1,
+                "date_depart": "2024-12-15",
+                "consignee": "OCEAN_TRADE BP_21_BIS_ANDRAHARO_101\nANTANANARIVO\nMADAGASCAR",
+                "poid": 65640,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "ITOCHU_CORPORATION ATTN: TOKDF_SECTION\n5-1, KITA-AOYAMA_2-CHOME, MINATO-KU, TOKYO_107-8077\nJAPAN",
+                "bl_no": "",
+                "volume": 571.65
+            },
+            "produit": [
+                {
+                    "cargo_id": 1,
+                    "produit": "NEW_MAZDA_VEHICLES",
+                    "id": 1,
+                    "description_produit": "Shipper: ITOCHU_CORPORATION"
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309637",
+                    "id": 1
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309756",
+                    "id": 2
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309636",
+                    "id": 3
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309643",
+                    "id": 4
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309757",
+                    "id": 5
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309758",
+                    "id": 6
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309875",
+                    "id": 7
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309876",
+                    "id": 8
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309877",
+                    "id": 9
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1309642",
+                    "id": 10
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1310079",
+                    "id": 11
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7DM2W7AS1310112",
+                    "id": 12
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HD0S1108028",
+                    "id": 13
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HD2S1108080",
+                    "id": 14
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HD1S1108054",
+                    "id": 15
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HD7S1108060",
+                    "id": 16
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HC9S1108018",
+                    "id": 17
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HCXS1108027",
+                    "id": 18
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HC6S1108042",
+                    "id": 19
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HC0S1108070",
+                    "id": 20
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KK2HC7S1108082",
+                    "id": 21
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124468",
+                    "id": 22
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124746",
+                    "id": 23
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0125512",
+                    "id": 24
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124555",
+                    "id": 25
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124631",
+                    "id": 26
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0123250",
+                    "id": 27
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0123750",
+                    "id": 28
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124074",
+                    "id": 29
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF2W7AS0124296",
+                    "id": 30
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF4WLAS0123841",
+                    "id": 31
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF4WLAS0124328",
+                    "id": 32
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KF4WLAS0123395",
+                    "id": 33
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HD0S1108054",
+                    "id": 34
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HD6S1108074",
+                    "id": 35
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HDXS1108126",
+                    "id": 36
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HD9S1108148",
+                    "id": 37
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HD6S1108169",
+                    "id": 38
+                },
+                {
+                    "cargo_id": 1,
+                    "vin": "JM7KH1HD7S1108214",
+                    "id": 39
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 2,
+                "date_depart": "2024-12-15",
+                "consignee": "MADAGASCAR_AUTOMOBILE_SA RUE_DR_RASETA_ANDRAHARO\nANTANANARIVO_101_MADAGASCAR",
+                "poid": 15000,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "NISSAN_MOTOR_CO.,LTD. 1-1,TAKASHIMA_1-CHOME,NISHI-KU,\nYOKOHAMA,KANAGAWA_220-8686\nJAPAN * TEL:(045)523-5523",
+                "bl_no": "",
+                "volume": 156.96
+            },
+            "produit": [
+                {
+                    "cargo_id": 2,
+                    "produit": "NISSAN_VEHICLE",
+                    "id": 2,
+                    "description_produit": "Shipper: NISSAN_MOTOR_CO.,LTD."
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1UC4E26Z0066991",
+                    "id": 40
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1UC4E26Z0067075",
+                    "id": 41
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1UC4E26Z0067093",
+                    "id": 42
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1VC4E26Z0040237",
+                    "id": 43
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1VC4E26Z0040245",
+                    "id": 44
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1VC4E26Z0040250",
+                    "id": 45
+                },
+                {
+                    "cargo_id": 2,
+                    "vin": "JN1VC4E26Z0040256",
+                    "id": 46
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 3,
+                "date_depart": "2024-12-15",
+                "consignee": "MADAGASCAR_AUTOMOBILE_SA RUE_DR_RASETA_ANDRAHARO\nANTANANARIVO_101_MADAGASCAR",
+                "poid": 11040,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "NISSAN_MOTOR_CO.,LTD. 1-1,TAKASHIMA_1-CHOME,NISHI-KU,\nYOKOHAMA,KANAGAWA_220-8686\nJAPAN * TEL:(045)523-5523",
+                "bl_no": "",
+                "volume": 85.78
+            },
+            "produit": [
+                {
+                    "cargo_id": 3,
+                    "produit": "NISSAN_VEHICLE",
+                    "id": 3,
+                    "description_produit": "Shipper: NISSAN_MOTOR_CO.,LTD."
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 3,
+                    "vin": "JN1TANY62Z0171610",
+                    "id": 47
+                },
+                {
+                    "cargo_id": 3,
+                    "vin": "JN1TANY62Z0171583",
+                    "id": 48
+                },
+                {
+                    "cargo_id": 3,
+                    "vin": "JN1TANY62Z0171712",
+                    "id": 49
+                },
+                {
+                    "cargo_id": 3,
+                    "vin": "JN1TANY62Z0171677",
+                    "id": 50
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 4,
+                "date_depart": "2024-12-15",
+                "consignee": "MADAGASCAR_AUTOMOBILE_SA RUE_DR_RASETA_ANDRAHARO\nANTANANARIVO_101_MADAGASCAR",
+                "poid": 2200,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "NISSAN_MOTOR_CO.,LTD. 1-1,TAKASHIMA_1-CHOME,NISHI-KU,\nYOKOHAMA,KANAGAWA_220-8686\nJAPAN * TEL:(045)523-5523",
+                "bl_no": "",
+                "volume": 24.02
+            },
+            "produit": [
+                {
+                    "cargo_id": 4,
+                    "produit": "NISSAN_VEHICLE",
+                    "id": 4,
+                    "description_produit": "Shipper: NISSAN_MOTOR_CO.,LTD."
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 4,
+                    "vin": "JN1UC4E26Z0067225",
+                    "id": 51
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 5,
+                "date_depart": "2024-12-15",
+                "consignee": "MADASMART LOT_III_N 48_FIADANANA_NIF_6001279887",
+                "poid": 21500,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "NANJING_AUTOMOBILE_IMPORT & EXPORT_CO., LTD. 9TH_FLOOR, R&D_MANSION_B, NO. 2, LIJING_ROAD, NANJING, P. R. CHINA\nTEL: 86-25-89617522\nFAX:86-25-83111295",
+                "bl_no": "",
+                "volume": 183.31
+            },
+            "produit": [
+                {
+                    "cargo_id": 5,
+                    "produit": "MAXUS_VEHICLES",
+                    "id": 5,
+                    "description_produit": "Shipper: NANJING_AUTOMOBILE_IMPORT & EXPORT_CO., LTD."
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A3RA128691",
+                    "id": 52
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A5RA128692",
+                    "id": 53
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A7RA128693",
+                    "id": 54
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A9RA128694",
+                    "id": 55
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A0RA128695",
+                    "id": 56
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A2RA128696",
+                    "id": 57
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A4RA128697",
+                    "id": 58
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A6RA128698",
+                    "id": 59
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A8RA128699",
+                    "id": 60
+                },
+                {
+                    "cargo_id": 5,
+                    "vin": "LSFAM11A0RA128700",
+                    "id": 61
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 6,
+                "date_depart": "2024-12-15",
+                "consignee": "TO_THE_ORDER_OF_CFAO . MOBILITY_MADAGASCAR, TERMS_CFR_TAMATAVE ROND-POINTANOSIZATO_MADAGASCAR\nANTANANARIVO_101_MADAGASCAR\n(AS_PER_INCOTERMS_2020)",
+                "poid": 8430,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "BYD (H.K.) CO.,LIMITED GRAND_CENTRAL_PLAZA,TOWER_2, 138_SHATIN_RURAL_COMMITTEE_RD\nHONG_KONG_CHINA",
+                "bl_no": "",
+                "volume": 71.11
+            },
+            "produit": [
+                {
+                    "cargo_id": 6,
+                    "produit": "BYD_VEHICLES_AS_PER_PROFORMA_INVOICE_NUMBER_PI-PV-24-310135_DATED_28-OCT-24",
+                    "id": 6,
+                    "description_produit": "Shipper: BYD (H.K.) CO.,LIMITED"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 7,
+                "date_depart": "2024-12-15",
+                "consignee": "TO_THE_ORDER_OF_CFAO_MOBILITY_MADAGASCAR, TERMS_CFR_TAMATAVE ROND-POINTANOSIZATO_MADAGASCAR\nANTANANARIVO_101_MADAGASCAR\n(AS_PER_INCOTERMS_2020)",
+                "poid": 8750,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "BYD (H.K.) CO.,LIMITED GRAND_CENTRAL_PLAZA,TOWER_2, 138_SHATIN_RURAL_COMMITTEE_RD\nHONG_KONG_CHINA",
+                "bl_no": "",
+                "volume": 67.25
+            },
+            "produit": [
+                {
+                    "cargo_id": 7,
+                    "produit": "+5_BYD_VEHICLES_AS_PER_PROFORMA_INVOICE_NUMBER_CI-PV-24-310134_DATED_28-OCT-24.\nBYD_ATTO_3 EV_LUXURY, 4_UNITS_GREY , 1_UNIT_WHITE, 2025VIN\nCOUNTRY_OF_ORIGIN : CHINA",
+                    "id": 7,
+                    "description_produit": "Shipper: BYD (H.K.) CO.,LIMITED"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 8,
+                "date_depart": "2024-12-15",
+                "consignee": "RAHANTANIRINA_SYLVIE LOT_41_B BIS_AMBOAVAHY\nANTANANARIVO, MADAGASCAR\nTEL. +261340242127\nTIANA.RAZAFIMBOLAFIDY@GMAIL.COM",
+                "poid": 1965,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "AUTOWINI_INC. 3F, HANDOK_BLDG., 2645, NAMBUSUNHWAN-RO, GANGNAM-GU,\nSEOUL, 06271, SOUTH_KOREA\nTEL : +82-2-576-5533",
+                "bl_no": "",
+                "volume": 15.63
+            },
+            "produit": [
+                {
+                    "cargo_id": 8,
+                    "produit": "1UNIT_OF_USED_CAR_HYUNDAI_MAXCRUZ_2016\nKMHSN81XDGU153360",
+                    "id": 8,
+                    "description_produit": "Shipper: AUTOWINI_INC."
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 9,
+                "date_depart": "2024-12-15",
+                "consignee": "LE_MATERIEL_AUTOMOBILE_ET_INDUSTRIEL BP_1516_TAMATAVE_MADAGASCAR",
+                "poid": 49500,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "VOLVO_CONSTRUCTION_EQUIPMENT_AB REGION_INTERNATIONAL\nSE-631_85_ESKILSTUNA_SWEDEN",
+                "bl_no": "",
+                "volume": 173.69
+            },
+            "produit": [
+                {
+                    "cargo_id": 9,
+                    "produit": "1_x Volvo_EC480DL_Crawler_Excavator\nVIN_VCEC480DC00285922",
+                    "id": 9,
+                    "description_produit": "Shipper: VOLVO_CONSTRUCTION_EQUIPMENT_AB"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 10,
+                "date_depart": "2024-12-15",
+                "consignee": "CFAO_MOBILITY_MADAGASCAR S.B.NO.:5742571_DTD:19-NOV-2024\n2EME_ETAGE_IMMEUBLE_TRADE_TOWER_ALAROBIA_AMBONILOHA_101_ANTANANARIVO_MADAGASCAR\nINVOICE_NO. 3175271 . I.E. CODE_NO. 0588000591",
+                "poid": 5760,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "MARUTI_SUZUKI_INDIA_LTD., PALAM-GURGAON_ROAD, GURGAON_HARYANA-122015\nFOR_THE_ACCOUNT_OF_AFRICA_MOBILITY_SOLUTIONS_FRANCE, 57-59, RUE_YVES_KERMEN_92100_BOULOGNE-BILLANCOURT\nIMO_NUMERO_9606479",
+                "bl_no": "",
+                "volume": 59.35
+            },
+            "produit": [
+                {
+                    "cargo_id": 10,
+                    "produit": "UNPACKED_SUZUKI\n3_QIEB12M00016800_MT\n3_QIEBA2C00016800_MT",
+                    "id": 10,
+                    "description_produit": "Shipper: MARUTI_SUZUKI_INDIA_LTD.,"
+                }
+            ],
+            "vin": [
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08WS0D99289",
+                    "id": 62
+                },
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08WS0E00363",
+                    "id": 63
+                },
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08WS0D99825",
+                    "id": 64
+                },
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08BS0E00207",
+                    "id": 65
+                },
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08BS0D99216",
+                    "id": 66
+                },
+                {
+                    "cargo_id": 10,
+                    "vin": "MA3JDT08BS0E00383",
+                    "id": 67
+                }
+            ]
+        },
+        {
+            "cargo": {
+                "id": 11,
+                "date_depart": "2024-12-15",
+                "consignee": "OCEAN_TRADE BP_21_BIS_ANDRAHARO_101\nANTANANARIVO_MADAGASCAR",
+                "poid": 91500,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "ITOCHU_CORPORATION ATTN: TOKDF_SECTION\n5-1, KITA-AOYAMA_2-CHOME, MINATO-KU, TOKYO_107-8077\nJAPAN",
+                "bl_no": "",
+                "volume": 902.25
+            },
+            "produit": [
+                {
+                    "cargo_id": 11,
+                    "produit": "NEW_MAZDA_VEHICLES\nH.S_CODE : 8704.21\nVIN_NO. AS_PER_ATTACHED_SHEET",
+                    "id": 11,
+                    "description_produit": "Shipper: ITOCHU_CORPORATION"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 12,
+                "date_depart": "2024-12-15",
+                "consignee": "MADAGASCAR_INTERNATIONAL_CONTAINER_TERMINAL_SERVICES_LTD. 10_RUE_DU_COMMERCE_AMPASIMAZAVA_TOAMASINA_501 - MADAGASCAR\nATTN : NATHALIE_RAVOAJANAHARY\nTEL : +261341971074 / +261348036656 *",
+                "poid": 45000,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "TERBERG_TRACTORS_MALAYSIA_SDN_BHD NO_18, JALAN_PP11/1, ALAM_PERDANA_INDUSTRIAL_PARK_TAMAN_PUTRA_PERDANA\n47130_PUCHONG, SELANGOR_MALAYSIA\nTAX_ID : C_20002646010\nATTN : MR. CHAIVAT",
+                "bl_no": "",
+                "volume": 275.61
+            },
+            "produit": [
+                {
+                    "cargo_id": 12,
+                    "produit": "TERBERG_TERMINAL_TRACTORS_YT220\nCONSIST_AS_FOLLOW :\nCHASSIS_NO_ENGINE_NO\nXLWYT2202RB739380_22680327\nXLWYT2204RB739381_22680251\nXLWYT2206RB739382_22680249\nXLWYT2208RB739383_22680342\nXLWYT220XRB739384_22680315\nXLWYT2201RB739385_22680271",
+                    "id": 12,
+                    "description_produit": "Shipper: TERBERG_TRACTORS_MALAYSIA_SDN_BHD"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 13,
+                "date_depart": "2024-12-15",
+                "consignee": "LE_MATERIEL_AUTOMOBILE_ET_INDUSTRIEL(MATERAUTO) 101_ANTANANARIVO_MADAGASCAR",
+                "poid": 9794,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "FORD_MOTOR_COMPANY (THAILAND) LTD MOO_3, TAMBOL_TASIT_AMPHUR_PLUAKDAENG, RAYONG_21140_THAILAND\nON_BEHALF_OF_FORD_TRADING_COMPANY, LLC\nREGISTRATION_NUMBER: 205552019634",
+                "bl_no": "",
+                "volume": 84.99
+            },
+            "produit": [
+                {
+                    "cargo_id": 13,
+                    "produit": "3_X 2025_RANGER_RBACK_DCAB_3.0L_GAS_397PS_S5_10SPD_AT_4WD_FTD\n1_X 2025_RANGER_RBACK_DCAB_2.0L_DSL_210PS_S4_10SPD_AT_4WD_FTD",
+                    "id": 13,
+                    "description_produit": "Shipper: FORD_MOTOR_COMPANY (THAILAND) LTD"
+                }
+            ],
+            "vin": []
+        },
+        {
+            "cargo": {
+                "id": 14,
+                "date_depart": "2024-12-15",
+                "consignee": "LE_MATERIEL_AUTOMOBILE_ET_INDUSTRIEL(MATERAUTO) 101_ANTANANARIVO_MADAGASCAR",
+                "poid": 6885,
+                "voyage_id": 1,
+                "port_depart": "NAKANOSEKI / 1",
+                "shipper": "AUTO_ALLIANCE (THAILAND) CO., LTD PANTHER_49_MOO_4, EASTERN_SEABOARD_INDUSTRIAL_ESTATE (RAYONG)\nPLUAKDAENG_PLUKDAENG_RAYONG_211\nON_BEHALF_OF_FORD_TRADING_COMPANY, LLC",
+                "bl_no": "",
+                "volume": 55.94
+            },
+            "produit": [
+                {
+                    "cargo_id": 14,
+                    "produit": "3_X 2025_EVEREST_XLT_2.0L_DIESEL_210PS_10_SPEED_AUTO_TRANS_STAGE_4 4X4",
+                    "id": 14,
+                    "description_produit": "Shipper: AUTO_ALLIANCE (THAILAND) CO., LTD"
+                }
+            ],
+            "vin": []
+        }
+    ]
+}

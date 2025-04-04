@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import usePageTitle from "../hooks/usePageTitle";
-import Sidebar from "../layouts/Sidebar";
 import Topbar from "../layouts/Topbar";
 import { Toolbar } from 'primereact/toolbar';
 import { Button } from 'primereact/button';
@@ -11,16 +10,19 @@ import { Column } from 'primereact/column';
 import { Dialog } from "primereact/dialog";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import { FilterMatchMode } from "primereact/api";
+import { Toast } from "primereact/toast";
 
 export default function Utilisateur() {
     usePageTitle("Utilisateur")
 
-    const [filters, setFilters] = useState({
+    const toast = useRef(null);
+
+    const filters = useState({
         identifiant: { value: null, matchMode: FilterMatchMode.STARTS_WITH }
     });
 
     const [utilisateur, setUtilisateur] = useState([
-        { id: 0, identifiant: "", password: "" }
+        { id: 0, identifiant: "aucun", password: "***" }
     ]);
 
     const getAllData = () => {
@@ -37,6 +39,12 @@ export default function Utilisateur() {
             })
             .catch((error) => {
                 console.log(error);
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Erreur de serveur",
+                    life: 3000
+                });  
             });
     }
 
@@ -74,9 +82,21 @@ export default function Utilisateur() {
             .then((data) => {
                 console.log(data);
                 getAllData();   
+                toast.current.show({
+                    severity: "info",
+                    summary: "Infor",
+                    detail: "Utilisateur supprimer avec success",
+                    life: 3000
+                });  
             })
             .catch((error) => {
                 console.log(error);
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Erreur de serveur",
+                    life: 3000
+                });  
             })
     }
 
@@ -119,6 +139,12 @@ export default function Utilisateur() {
             })
             .catch((error) => {
                 console.log(error);
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Erreur de serveur",
+                    life: 3000
+                });  
             })
 
     }
@@ -143,6 +169,12 @@ export default function Utilisateur() {
             })
             .catch((error) => {
                 console.log(error);
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Erreur de serveur",
+                    life: 3000
+                });  
             })
 
     }
@@ -173,7 +205,7 @@ export default function Utilisateur() {
                         filters={filters} filterDisplay="row"
                         paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} vessel" >
+                        currentPageReportTemplate="{first} à {last} dans {totalRecords} utilisateur" >
                         <Column sortable field="id" header="ID" ></Column>
                         <Column filter filterPlaceholder="Search by identifiant" field="identifiant" header="Identifiant" ></Column>
                         <Column field="date_login" header="Derniere connexion" ></Column>
@@ -193,6 +225,7 @@ export default function Utilisateur() {
 
             </Dialog>
             <ConfirmDialog />
+            <Toast ref={toast}/>
         </>
     )
 }

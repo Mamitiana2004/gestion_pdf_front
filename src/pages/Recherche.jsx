@@ -14,13 +14,21 @@ import { Dropdown } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
 
 import { Sidebar } from 'primereact/sidebar';
+import Format from "../helpers/Format.min";
+
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Divider } from "primereact/divider";
 
 export default function Recherche() {
     usePageTitle("Recherche")
     const [loading, setLoading] = useState(false);
     const [affichePDF, setAffichagePDF] = useState(false);
+    const [afficheDetail, setAffichageDetail] = useState(false);
     const [selected, setSelected] = useState(null);
     const [page, setPage] = useState(0);
+
+    const [data, setData] = useState(null);
 
     const [visibleImport, setVisibleImport] = useState(false);
 
@@ -57,12 +65,12 @@ export default function Recherche() {
     };
 
 
-    const [pdf, setPdf] = useState([{
-        id: 0, nom: "", nom_serveur: ""
-    }]);
+    const [pdf, setPdf] = useState([]);
 
     const [contenu, setContenu] = useState();
     const [nom, setNom] = useState();
+    const [vessel,setVessel] = useState();
+    const [voyage,setVoyage] = useState();
 
     const [resultContenu, setResultContenu] = useState([]);
 
@@ -70,8 +78,95 @@ export default function Recherche() {
         setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_name?text=${nom}`, { method: "GET" })
             .then((res) => res.json())
-            .then(data => {
-                setPdf(data.resultat)
+            .then(data => {let donnee = [];
+                data.resultat.map((d) => {
+                    donnee.push({
+                        ...d,
+                        items: [
+                            {
+                                label: "Voir le Pdf",
+                                icon: "pi pi-eye",
+                                command: () => {
+                                    viewPDF(d.id)
+                                }
+                            },
+                            // {
+                            //     label: 'Supprimer',
+                            //     icon: "pi pi-trash",
+                            //     command: () => {
+
+                            //     }
+                            // }
+                        ]
+                    })
+                });
+                setPdf(donnee)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+        setResultContenu([])
+    }
+    
+    const searchByVessel = () => {
+        setLoading(true)
+        fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_vessel?text=${vessel}`, { method: "GET" })
+            .then((res) => res.json())
+            .then(data => {let donnee = [];
+                data.resultat.map((d) => {
+                    donnee.push({
+                        ...d,
+                        items: [
+                            {
+                                label: "Voir le Pdf",
+                                icon: "pi pi-eye",
+                                command: () => {
+                                    viewPDF(d.id)
+                                }
+                            },
+                            // {
+                            //     label: 'Supprimer',
+                            //     icon: "pi pi-trash",
+                            //     command: () => {
+
+                            //     }
+                            // }
+                        ]
+                    })
+                });
+                setPdf(donnee)
+            })
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
+        setResultContenu([])
+    }
+    
+    const searchByVoyage = () => {
+        setLoading(true)
+        fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_voyage?text=${voyage}`, { method: "GET" })
+            .then((res) => res.json())
+            .then(data => {let donnee = [];
+                data.resultat.map((d) => {
+                    donnee.push({
+                        ...d,
+                        items: [
+                            {
+                                label: "Voir le Pdf",
+                                icon: "pi pi-eye",
+                                command: () => {
+                                    viewPDF(d.id)
+                                }
+                            },
+                            // {
+                            //     label: 'Supprimer',
+                            //     icon: "pi pi-trash",
+                            //     command: () => {
+
+                            //     }
+                            // }
+                        ]
+                    })
+                });
+                setPdf(donnee)
             })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
@@ -103,7 +198,7 @@ export default function Recherche() {
                                 label: "Voir le Pdf",
                                 icon: "pi pi-eye",
                                 command: () => {
-                                    viewPDF(d.nom_serveur, d.nom)
+                                    viewPDF(d.id)
                                 }
                             },
                             // {
@@ -119,12 +214,23 @@ export default function Recherche() {
                 setPdf(donnee)
 
             })
-            .catch((error) => console.error(error))
+            .catch((error) => {
+                console.error(error)
+
+                toast.current.show({
+                    severity: "error",
+                    summary: "Error",
+                    detail: "Erreur de serveur",
+                    life: 3000
+                });
+            })
             .finally(() => setLoading(false));
     }
 
     useEffect(() => {
         getAllPDF()
+        console.log(data);
+
     }, [])
 
 
@@ -142,9 +248,9 @@ export default function Recherche() {
     }
 
     const [pdfURL, setPdfURL] = useState("");
-    const viewPDF = (name, nom_file) => {
+    const viewPDF = (id) => {
         setLoading(true)
-        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/${name}`, { method: "GET" })
+        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/${id}`, { method: "GET" })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to download file");
@@ -167,7 +273,7 @@ export default function Recherche() {
         setLoading(true)
         setSelected(item)
         setPage(item.pages[0])
-        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/${item.nom_serveur}`, { method: "GET" })
+        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/${item.id}`, { method: "GET" })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error("Failed to download file");
@@ -233,15 +339,35 @@ export default function Recherche() {
                     <div className={style.pdf_detail_container}>
                         <span className={style.pdf_detail_title}>Detail</span>
                         <div className={style.pdf_detail}>
-                            <span>Date d'ajout : <b>Indisponible</b></span>
-                            <span>Nombre de page : <b>Indisponible</b></span>
+                            <span>Date d'ajout : <b>{Format.formatDate(item.date_ajout)}</b></span>
+                            <span>Nombre de page : <b>{item.nombre_page}</b></span>
                         </div>
                         <br />
-                        <Button icon="pi pi-database" onClick={() => viewPDF(item.nom_serveur, item.nom)} className={style.pdf_detail_button} label="Voir les données   " />
+                        <Button icon="pi pi-database" onClick={() => viewData(item)} className={style.pdf_detail_button} label="Voir les données   " />
                     </div>
                 </div>
             );
         }
+    }
+
+    const viewData = (item) => {
+        setLoading(true);
+        setSelected(item)
+        fetch(`${process.env.REACT_APP_API_URL}/api/pdf/get_test/${item.id}`, { method: "GET" })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to download file");
+                }
+                return response.json(); // Convert the response to a Blob
+            })
+            .then((data) => {
+                setData(data)
+            })
+            .catch((error) => {
+                console.error("Error downloading file:", error);
+            })
+            .finally(() => setLoading(false));
+        setAffichageDetail(true);
     }
 
     const list_contenu_template = (items) => {
@@ -314,12 +440,71 @@ export default function Recherche() {
         setVisibleImport(false)
     }
 
+
+    const consignee_template = (cargo) => {
+        let consignees = cargo.cargo.consignee.split("|");
+        return (
+            <div className={style.pdf_donnee_table_consignee}>
+                {consignees.map((consignee) => {
+                    let consignee_str = consignee.replaceAll("_", " ")
+                    return <span>{consignee_str}</span>
+                })}
+            </div>
+        )
+    }
+
+    const shipper_template = (cargo) => {
+        let shippers = cargo.cargo.shipper.split("|");
+        return (<div className={style.pdf_donnee_table_consignee}>
+            {shippers.map((shipper) => {
+                let shipper_str = shipper.replaceAll("_", " ")
+                return <span>{shipper_str}</span>
+            })}
+        </div>)
+    }
+
+
+    const [expandedRows, setExpandedRows] = useState(null);
+    const allowExpansion = (rowData) => {
+        return rowData.produit.length > 0;
+    };
+
+    const produit_template = (data) => {
+        return (<div className={style.produit_pdf_donnee}>
+            <span className={style.produit_pdf_donnee_title}>Liste des produits </span>
+            <div className={style.liste_produit}>
+                {data.produit.map((produit) => {
+                    let product_name = produit.produit.replaceAll("_", " ");
+                    return <span>{product_name}</span>
+                })}
+            </div>
+            <div className={style.pdf_donnee_detail}>
+                <div className={style.pdf_donnee_detail_item}>
+                    <span>Poid Total</span>
+                    <span className={style.pdf_donnee_detail_item_value}>{Format.formatNombre(data.cargo.poid)} Kg</span>
+                </div>
+                <div className={style.pdf_donnee_detail_item}>
+                    <span>Taille</span>
+                    <span className={style.pdf_donnee_detail_item_value}>{Format.formatNombre(data.cargo.volume)} M</span>
+                </div>
+            </div>
+            <DataTable paginator rows={5} rowsPerPageOptions={[5, 10, 25]} paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} VIin No" value={data.vin}>
+                <Column field="vin" header="Vin no" />
+            </DataTable>
+
+
+        </div>)
+    }
+
+
+
     return (
         <>
             {
                 !loading ?
                     <>
-                        <Topbar name="pdf"/>
+                        <Topbar name="pdf" />
                         <Tooltip target="#detail .p-speeddial-action" position="left" />
                         <Dialog draggable={false} visible={visibleImport} onHide={() => setVisibleImport(false)} header="Importer un nouveau PDF" footer={<Button onClick={sendDataPdf} className={style.import_pdf} label="Ajouter ce document" />}>
                             <FileInput fileValue={setPdfFile} />
@@ -344,7 +529,9 @@ export default function Recherche() {
                                     title="PDF Viewer"
                                 />
                                 :
-                                <></>}
+                                <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <ProgressSpinner />
+                                </div>}
                         </Dialog>
                     </>
                     :
@@ -354,6 +541,57 @@ export default function Recherche() {
                         </div>
                     </>
             }
+            <Dialog draggable={false} header="Détail du pdf" visible={afficheDetail} onHide={() => { setAffichageDetail(false); setData(null) }} maximized={true}>
+                {
+                    data ?
+                        <div className={style.pdf_donnee_container}>
+                            <div className={style.pdf_donnee_header}>
+                                <span className={style.pdf_donnee_header_title}>Nom du document : <span>{selected.nom}.pdf</span></span>
+                                <span className={style.pdf_donnee_header_subtitle}>
+                                    Ce document contient les informations détaillées sur la cargaison transportée, incluant le navire, le voyage, l'expéditeur et le destinataire. Il permet de suivre et de vérifier les données relatives au transport maritime jusqu'à sa destination finale.
+                                </span>
+                            </div>
+                            <span className={style.pdf_donnee_title}>Détail du document</span>
+                            <div className={style.pdf_donnee_detail}>
+                                <div className={style.pdf_donnee_detail_item}>
+                                    <span>Navire</span>
+                                    <span className={style.pdf_donnee_detail_item_value}>{data.vessel.name.replaceAll("_", " ")}</span>
+                                </div>
+                                <div className={style.pdf_donnee_detail_item}>
+                                    <span>Drapeau</span>
+                                    <span className={style.pdf_donnee_detail_item_value}>{data.vessel.flag}</span>
+                                </div>
+                                <div className={style.pdf_donnee_detail_item}>
+                                    <span>Voyage</span>
+                                    <span className={style.pdf_donnee_detail_item_value}>{data.voyage.code.replaceAll("_", " ")}</span>
+                                </div>
+                                <div className={style.pdf_donnee_detail_item}>
+                                    <span>Date de d'arrivé</span>
+                                    <span className={style.pdf_donnee_detail_item_value}>{Format.formatDate(data.voyage.date_arrive)}</span>
+                                </div>
+                            </div>
+                            <span className={style.pdf_donnee_title}>Cargaison</span>
+                            {
+                                <DataTable style={{ width: "100%" }} value={data.cargo}
+                                    paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                                    expandedRows={expandedRows} rowExpansionTemplate={produit_template} onRowToggle={(e) => setExpandedRows(e.data)}
+                                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Cargaison">
+                                    <Column expander={allowExpansion} style={{ width: '5rem' }} />
+                                    <Column style={{ width: "120px" }} field="cargo.bl_no" header={"B/L No"} />
+                                    <Column body={consignee_template} header="Destinataire" />
+                                    <Column body={shipper_template} header="Expediteur" />
+                                    <Column field="cargo.port_depart" header="Port de départ" />
+                                </DataTable>
+                            }
+                        </div>
+                        :
+                        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <ProgressSpinner />
+                        </div>
+                }
+
+            </Dialog>
 
             <Sidebar
                 position="right"
@@ -372,6 +610,17 @@ export default function Recherche() {
                         <span className={style.search_item_label}>Nom du document</span>
                         <input value={nom} onChange={(e) => setNom(e.target.value)} className={style.search_item_input} placeholder="Rechercher par nom du PDF" type="text" />
                         <button onClick={() => { setSidebarVisible(false); searchByName() }} className={style.search_item_button}>Rechercher</button>
+                    </div>
+                    <Divider />
+                    <div className={style.search_item}>
+                        <span className={style.search_item_label}>Navire</span>
+                        <input value={vessel} onChange={(e) => setVessel(e.target.value)} className={style.search_item_input} placeholder="Rechercher par navire" type="text" />
+                        <button onClick={() => { setSidebarVisible(false); searchByVessel() }} className={style.search_item_button}>Rechercher</button>
+                    </div>
+                    <div className={style.search_item}>
+                        <span className={style.search_item_label}>Voyage</span>
+                        <input value={voyage} onChange={(e) => setVoyage(e.target.value)} className={style.search_item_input} placeholder="Rechercher par voyage" type="text" />
+                        <button onClick={() => { setSidebarVisible(false); searchByVoyage() }} className={style.search_item_button}>Rechercher</button>
                     </div>
                 </div>
 
