@@ -15,7 +15,10 @@ export default function Topbar(props) {
         <div className={style.container}>
             <div className={style.wrapper}>
                 <div className={style.menu_wrapper}>
-                    <span className={style.nav_title}>Manifest</span>
+                    <span className={style.nav_title}>
+                        <img className={style.nav_logo} src='/assets/images/logo.png' alt='logo'/>
+                        Manifest 
+                    </span>
                 </div>
                 <div className={style.menu_wrapper}>
                     <a className={props.name!=="stat" ? style.nav_link : style.nav_link_active} href='/admin/stat'>

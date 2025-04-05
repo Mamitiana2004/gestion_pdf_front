@@ -22,7 +22,6 @@ export default function Utilisateur() {
     });
 
     const [utilisateur, setUtilisateur] = useState([
-        { id: 0, identifiant: "aucun", password: "***" }
     ]);
 
     const getAllData = () => {

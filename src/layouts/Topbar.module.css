@@ -1,5 +1,4 @@
 .container{
-    font-family: Nunito;
     display: flex;
     justify-content: flex-start;
     position: fixed;
@@ -22,6 +21,7 @@
     box-shadow:  0px 2px 4px rgba(0, 0, 0, 0.15);
     width: 100%;
     flex-direction: row;
+    height: 120px;
     padding: 12px 20px;
     box-sizing: border-box;
     align-items: center;
@@ -51,11 +51,17 @@
     transition: all 0.7s;
 }
 
+.nav_logo{
+    width: 150px;
+}
+
 .nav_title{
     font-size: 32px;
     position: relative;
     font-weight: 600;
     transition: all 0.7s;   
+    display: flex;
+    align-items: center;
 }
 
 .button_menu {

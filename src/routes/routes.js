@@ -30,10 +30,6 @@ const protected_routes = [
         element:<Utilisateur/>
     },
     {
-        path:"/admin/data",
-        element:<Vessel/>
-    },
-    {
         path:"/admin/pdf",
         element:<Recherche/>
     }

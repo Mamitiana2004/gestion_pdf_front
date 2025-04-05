@@ -1,6 +1,6 @@
 .container{
     position: absolute;
-    top: 80px;
+    top: 120px;
     left: 0;
     overflow-x: hidden;
     display: flex;
@@ -11,8 +11,6 @@
     width: 100vw;
     height: calc(100vh - 80px);
 }
-
-.container_title{}
 
 .wrapper{
     display: flex;

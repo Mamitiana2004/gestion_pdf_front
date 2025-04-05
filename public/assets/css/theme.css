@@ -1,17 +1,17 @@
 :root{
-    --color-1: #481A95;
+    --color-1: #152d4a;
     --opacity-100-color-1: #3A0F83;
-    --opacity-70-color-1: #481A95B2;
-    --opacity-50-color-1: #481A9580;
-    --opacity-30-color-1: #481A954D;
-    --opacity-10-color-1: #481A951A;
+    --opacity-70-color-1: #152d4aB2;
+    --opacity-50-color-1: #152d4a80;
+    --opacity-30-color-1: #152d4a4D;
+    --opacity-10-color-1: #152d4a1A;
     
-    --color-2: #C539B5;
+    --color-2: #f9da1a;
     --opacity-100-color-2: #B529A6;
-    --opacity-70-color-2: #C539B5B2;
-    --opacity-50-color-2: #C539B580;
-    --opacity-30-color-2: #C539B54D;
-    --opacity-10-color-2: #C539B51A;
+    --opacity-70-color-2: #f9da1aB2;
+    --opacity-50-color-2: #f9da1a80;
+    --opacity-30-color-2: #f9da1a4D;
+    --opacity-10-color-2: #f9da1a1A;
     
     --color-3: #01D0EF;
     --opacity-100-color-3: #03B0CA;
