@@ -13,47 +13,107 @@ export default function Manifest() {
 
 
     const [chartData, setChartData] = useState({});
+    const [chartDataVessel, setChartDataVessel] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
-    const [produit,setProduit] = useState([
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
-    ]);
+    const [produit,setProduit] = useState([]);
+
+    const getAllProduit = () =>{
+        let url = `${process.env.REACT_APP_API_URL}/api/stat/getAllProduit`
+        fetch(url,{
+            method:"GET"
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            setProduit(data)
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+
+    const getData_Chart = () =>{
+        let url = `${process.env.REACT_APP_API_URL}/api/stat/nombre_cargo_pays`
+        fetch(url,{
+            method:"GET"
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            let labels = []
+            let datasets = []
+            data.map((d)=>{
+                labels.push(d.pays.pays)
+                datasets.push(d.nombre_cargo)
+            })
+
+            const char_data = {
+                labels:labels,
+                datasets: [
+                    {
+                        label: 'Cargaison',
+                        data: datasets,
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgb(255, 159, 64)',
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            };
+    
+            setChartData(char_data);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
+    
+    const getData_Chart_Vessel = () =>{
+        let url = `${process.env.REACT_APP_API_URL}/api/stat/nombre_voyage_vessel`
+        fetch(url,{
+            method:"GET"
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            let labels = []
+            let datasets = []
+            data.map((d)=>{
+                
+                
+                labels.push(d.vessel.name)
+                datasets.push(d.nombre_voyage)
+            })
+
+            const char_data = {
+                labels:labels,
+                datasets: [
+                    {
+                        label: 'Voyages',
+                        data: datasets,
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.2)',
+                        ],
+                        borderColor: [
+                            'rgb(255, 159, 64)',
+                        ],
+                        borderWidth: 1
+                    }
+                ]
+            };
+    
+            setChartDataVessel(char_data);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
 
     useEffect(() => {
-        const data = {
-            labels: ['Portugal', 'Senegal', 'Liberia', 'USA'],
-            datasets: [
-                {
-                    label: 'Cargaison',
-                    data: [50, 25, 72, 62],
-                    backgroundColor: [
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgb(255, 159, 64)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)'
-                    ],
-                    borderWidth: 1
-                }
-            ]
-        };
+        getAllProduit()
+        getData_Chart() 
+        getData_Chart_Vessel()       
         const options = {
             maintainAspectRatio: false,
             aspectRatio: 0.8,
@@ -64,7 +124,6 @@ export default function Manifest() {
             }
         };
 
-        setChartData(data);
         setChartOptions(options);
     }, []);
 
@@ -87,10 +146,10 @@ export default function Manifest() {
                     <div className={style.card_chart}>
                         <span className={style.title}>Liste des produits importés</span>
                         <DataTable paginator rows={5} value={produit} className={style.produit_datatable_container}>
-                            <Column field="produit" header="Produit"/>
-                            <Column field="pays" header="Pays d'origine"/>
-                            <Column field="date_arrive" header="Date d'arrive"/>
-                            <Column field="navire" header="Navire"/>
+                            <Column field="produit.produit" header="Produit"/>
+                            <Column field="pays_origine.pays" header="Pays"/>
+                            <Column field="voyage.date_arrive" header="Date d'arrive"/>
+                            <Column field="vessel.name" header="Navire"/>
                         </DataTable>
                     </div>
                     <div className={style.card_chart}>
@@ -107,7 +166,7 @@ export default function Manifest() {
                     </div>
                     <div className={style.card_chart}>
                         <span className={style.title}>Les statistique de nombre de voyage par navire</span>
-                        <Chart type="polarArea" style={{ width: "100%" }} data={chartData} options={chartOptions} />
+                        <Chart type="polarArea" style={{ width: "100%" }} data={chartDataVessel} options={chartOptions} />
                     </div>
                 </div>
 
