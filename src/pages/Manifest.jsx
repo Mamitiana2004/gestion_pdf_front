@@ -15,6 +15,22 @@ export default function Manifest() {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
+    const [produit,setProduit] = useState([
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+        {produit:"Mazda Vehicule",pays:"JAPAN",date_arrive:"2024-06-06",navire:"F59 PRIMROSE"},
+    ]);
+
     useEffect(() => {
         const data = {
             labels: ['Portugal', 'Senegal', 'Liberia', 'USA'],
@@ -65,32 +81,32 @@ export default function Manifest() {
                 <hr />
                 <div className={style.wrapper}>
                     <div className={style.card_chart}>
-                        <span>Les statistique des cargaisons par pays</span>
+                        <span className={style.title}>Les statistique des cargaisons par pays</span>
                         <Chart type="bar" style={{ width: "100%" }} data={chartData} options={chartOptions} />
                     </div>
                     <div className={style.card_chart}>
-                        <span>Liste des produits importés</span>
-                        <DataTable>
-                            <Column header="Produit"/>
-                            <Column header="Pays d'origine"/>
-                            <Column header="Date d'arrive"/>
-                            <Column header="Navire"/>
+                        <span className={style.title}>Liste des produits importés</span>
+                        <DataTable paginator rows={5} value={produit} className={style.produit_datatable_container}>
+                            <Column field="produit" header="Produit"/>
+                            <Column field="pays" header="Pays d'origine"/>
+                            <Column field="date_arrive" header="Date d'arrive"/>
+                            <Column field="navire" header="Navire"/>
                         </DataTable>
                     </div>
                     <div className={style.card_chart}>
-                        <span>Le produit le plus importé ce mois</span>
+                        <span className={style.title}>Le produit le plus importé ce mois</span>
                         <div className={style.produit_top_container}>
                             <div className={style.produit_image_container}>
                                 <img alt="produit" src="/assets/images/pro.png" />
                             </div>
                             <div className={style.produit_top_detail_container}>
-                                <span>Mazda Vehicule</span>
+                                <span>Produit : Mazda Vehicule</span>
                                 <span>Pays d'origine: <span>JAPAN</span></span>
                             </div>
                         </div>
                     </div>
                     <div className={style.card_chart}>
-                        <span>Les statistique de nombre de voyage par navire</span>
+                        <span className={style.title}>Les statistique de nombre de voyage par navire</span>
                         <Chart type="polarArea" style={{ width: "100%" }} data={chartData} options={chartOptions} />
                     </div>
                 </div>

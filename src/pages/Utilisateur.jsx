@@ -11,6 +11,7 @@ import { Dialog } from "primereact/dialog";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
 import { FilterMatchMode } from "primereact/api";
 import { Toast } from "primereact/toast";
+import Format from "../helpers/Format.min";
 
 export default function Utilisateur() {
     usePageTitle("Utilisateur")
@@ -43,7 +44,7 @@ export default function Utilisateur() {
                     summary: "Error",
                     detail: "Erreur de serveur",
                     life: 3000
-                });  
+                });
             });
     }
 
@@ -80,13 +81,13 @@ export default function Utilisateur() {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                getAllData();   
+                getAllData();
                 toast.current.show({
                     severity: "info",
                     summary: "Infor",
                     detail: "Utilisateur supprimer avec success",
                     life: 3000
-                });  
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -95,7 +96,7 @@ export default function Utilisateur() {
                     summary: "Error",
                     detail: "Erreur de serveur",
                     life: 3000
-                });  
+                });
             })
     }
 
@@ -103,7 +104,7 @@ export default function Utilisateur() {
     const leftToolbarTemplate = () => {
         return (
             <div className={style.toolbar_left}>
-                <Button label="New" icon="pi pi-plus" severity="success" onClick={openNew} />
+                <Button label="New" icon="pi pi-plus" className={style.btn_new} onClick={openNew} />
             </div>
         );
     };
@@ -134,7 +135,7 @@ export default function Utilisateur() {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                getAllData();   
+                getAllData();
             })
             .catch((error) => {
                 console.log(error);
@@ -143,7 +144,7 @@ export default function Utilisateur() {
                     summary: "Error",
                     detail: "Erreur de serveur",
                     life: 3000
-                });  
+                });
             })
 
     }
@@ -164,7 +165,7 @@ export default function Utilisateur() {
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                getAllData();   
+                getAllData();
             })
             .catch((error) => {
                 console.log(error);
@@ -173,7 +174,7 @@ export default function Utilisateur() {
                     summary: "Error",
                     detail: "Erreur de serveur",
                     life: 3000
-                });  
+                });
             })
 
     }
@@ -186,7 +187,7 @@ export default function Utilisateur() {
                     setSelectedUser(product);
                     setIdentifiant(product.identifiant);
                     setPassword(product.password);
-                }} icon="pi pi-pencil" severity="warning" />
+                }} icon="pi pi-pencil" className={style.btn_update} />
                 <Button onClick={() => {
                     deleteUtilisateur(product)
                 }} icon="pi pi-trash" severity="danger" />
@@ -194,11 +195,25 @@ export default function Utilisateur() {
         )
     }
 
+    const date_login_template = (item) => {
+        return <>{Format.formatDate(item.date_login)}</>
+    }
+
+    const date_create_template = (item) => {
+        return <>{Format.formatDate(item.date_create)}</>
+    }
+
     return (
         <>
             <Topbar name="utilisateur" />
             <div className={style.container}>
                 <div className={style.wrapper}>
+                    <div className={style.wrapper_head}>
+                        <span className={style.wrapper_head_title}>Utilisateur</span>
+                        <span className={style.wrapper_head_subtitle}>
+                            Gérez les comptes utilisateurs, attribuez des rôles et surveillez les activités au sein de la plateforme. Cette section permet un contrôle précis des accès et une meilleure organisation des responsabilités au sein du système de gestion douanière.
+                        </span>
+                    </div>
                     <Toolbar left={leftToolbarTemplate} style={{ width: "100%" }} />
                     <DataTable style={{ width: "100%" }} value={utilisateur}
                         filters={filters} filterDisplay="row"
@@ -207,8 +222,8 @@ export default function Utilisateur() {
                         currentPageReportTemplate="{first} à {last} dans {totalRecords} utilisateur" >
                         <Column sortable field="id" header="ID" ></Column>
                         <Column filter filterPlaceholder="Search by identifiant" field="identifiant" header="Identifiant" ></Column>
-                        <Column field="date_login" header="Derniere connexion" ></Column>
-                        <Column field="date_create" header="Date de creation" ></Column>
+                        <Column body={date_login_template} field="date_login" header="Derniere connexion" ></Column>
+                        <Column body={date_create_template} field="date_create" header="Date de creation" ></Column>
                         <Column body={actionTemplate} ></Column>
                     </DataTable>
                 </div>
@@ -224,7 +239,7 @@ export default function Utilisateur() {
 
             </Dialog>
             <ConfirmDialog />
-            <Toast ref={toast}/>
+            <Toast ref={toast} />
         </>
     )
 }

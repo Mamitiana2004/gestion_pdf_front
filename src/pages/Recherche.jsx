@@ -5,7 +5,8 @@ import Topbar from "../layouts/Topbar";
 import { Toolbar } from "primereact/toolbar";
 import { DataView } from "primereact/dataview";
 import { Button } from "primereact/button";
-import { ProgressSpinner } from "primereact/progressspinner";
+import { Helix } from 'ldrs/react'
+import 'ldrs/react/Helix.css'
 import { Dialog } from "primereact/dialog";
 import { SpeedDial } from 'primereact/speeddial';
 import { Tooltip } from "primereact/tooltip";
@@ -69,8 +70,8 @@ export default function Recherche() {
 
     const [contenu, setContenu] = useState();
     const [nom, setNom] = useState();
-    const [vessel,setVessel] = useState();
-    const [voyage,setVoyage] = useState();
+    const [vessel, setVessel] = useState();
+    const [voyage, setVoyage] = useState();
 
     const [resultContenu, setResultContenu] = useState([]);
 
@@ -78,7 +79,8 @@ export default function Recherche() {
         setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_name?text=${nom}`, { method: "GET" })
             .then((res) => res.json())
-            .then(data => {let donnee = [];
+            .then(data => {
+                let donnee = [];
                 data.resultat.map((d) => {
                     donnee.push({
                         ...d,
@@ -106,12 +108,13 @@ export default function Recherche() {
             .finally(() => setLoading(false));
         setResultContenu([])
     }
-    
+
     const searchByVessel = () => {
         setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_vessel?text=${vessel}`, { method: "GET" })
             .then((res) => res.json())
-            .then(data => {let donnee = [];
+            .then(data => {
+                let donnee = [];
                 data.resultat.map((d) => {
                     donnee.push({
                         ...d,
@@ -139,12 +142,13 @@ export default function Recherche() {
             .finally(() => setLoading(false));
         setResultContenu([])
     }
-    
+
     const searchByVoyage = () => {
         setLoading(true)
         fetch(`${process.env.REACT_APP_API_URL}/api/search/search_pdf_voyage?text=${voyage}`, { method: "GET" })
             .then((res) => res.json())
-            .then(data => {let donnee = [];
+            .then(data => {
+                let donnee = [];
                 data.resultat.map((d) => {
                     donnee.push({
                         ...d,
@@ -530,14 +534,22 @@ export default function Recherche() {
                                 />
                                 :
                                 <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    <ProgressSpinner />
+                                    <Helix
+                                        size="125"
+                                        speed="2.5"
+                                        color="black"
+                                    />
                                 </div>}
                         </Dialog>
                     </>
                     :
                     <>
                         <div style={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <ProgressSpinner />
+                            <Helix
+                                size="125"
+                                speed="2.5"
+                                color="black"
+                            />
                         </div>
                     </>
             }
@@ -572,22 +584,26 @@ export default function Recherche() {
                             </div>
                             <span className={style.pdf_donnee_title}>Cargaison</span>
                             {
-                                <DataTable style={{ width: "100%" }} value={data.cargo}
-                                    paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                                    expandedRows={expandedRows} rowExpansionTemplate={produit_template} onRowToggle={(e) => setExpandedRows(e.data)}
-                                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Cargaison">
-                                    <Column expander={allowExpansion} style={{ width: '5rem' }} />
-                                    <Column style={{ width: "120px" }} field="cargo.bl_no" header={"B/L No"} />
-                                    <Column body={consignee_template} header="Destinataire" />
-                                    <Column body={shipper_template} header="Expediteur" />
-                                    <Column field="cargo.port_depart" header="Port de départ" />
-                                </DataTable>
+                                    <DataTable style={{ width: "100%" }} value={data.cargo}
+                                        paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                                        expandedRows={expandedRows} rowExpansionTemplate={produit_template} onRowToggle={(e) => setExpandedRows(e.data)}
+                                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Cargaison">
+                                        <Column expander={allowExpansion} style={{ width: '5rem' }} />
+                                        <Column style={{ width: "120px" }} field="cargo.bl_no" header={"B/L No"} />
+                                        <Column body={consignee_template} header="Destinataire" />
+                                        <Column body={shipper_template} header="Expediteur" />
+                                        <Column field="cargo.port_depart" header="Port de départ" />
+                                    </DataTable>
                             }
                         </div>
                         :
                         <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            <ProgressSpinner />
+                            <Helix
+                                size="125"
+                                speed="2.5"
+                                color="black"
+                            />
                         </div>
                 }
 
