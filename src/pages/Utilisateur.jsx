@@ -221,7 +221,7 @@ export default function Utilisateur() {
                         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                         currentPageReportTemplate="{first} à {last} dans {totalRecords} utilisateur" >
                         <Column sortable field="id" header="ID" ></Column>
-                        <Column filter filterPlaceholder="Search by identifiant" field="identifiant" header="Identifiant" ></Column>
+                        <Column style = {{minWidth:"350px"}} filter filterPlaceholder="Search by identifiant" field="identifiant" header="Identifiant" ></Column>
                         <Column body={date_login_template} field="date_login" header="Derniere connexion" ></Column>
                         <Column body={date_create_template} field="date_create" header="Date de creation" ></Column>
                         <Column body={actionTemplate} ></Column>

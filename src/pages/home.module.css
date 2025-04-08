@@ -160,3 +160,25 @@
     background-color: var(--color-3);
     border: none;
 }
+
+@media (max-width:1540px){
+    .wrapper{
+        padding: 30px 50px;
+    }
+}
+
+@media (max-width:1340px){
+    .wrapper_head_title{
+        font-size: 20px;
+    }
+    .wrapper_head_subtitle{
+        font-size: 12px;
+    }
+}
+
+@media (max-width:650px){
+
+    .wrapper{
+        padding: 20px;
+    }
+}

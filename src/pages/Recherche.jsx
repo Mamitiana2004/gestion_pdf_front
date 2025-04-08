@@ -242,7 +242,7 @@ export default function Recherche() {
         return (
             <div className={style.toolbar_left}>
                 <Button icon="pi pi-plus" onClick={() => setVisibleImport(true)} className={style.button_import} label="Ajouter un nouveau document" />
-                <Dropdown style={{ width: "200px" }} options={sortOption} value={sortKey} optionLabel="label" placeholder="Trier par nom" onChange={onSortChange} />
+                <Dropdown  className={style.dropdown_filter_name}  options={sortOption} value={sortKey} optionLabel="label" placeholder="Trier par nom" onChange={onSortChange} />
             </div>
         );
     };

@@ -53,6 +53,7 @@
 
 .nav_logo{
     width: 150px;
+    transition: all 0.5s;
 }
 
 .nav_title{
@@ -177,7 +178,7 @@
     display: flex;
     width: 100%;
     background-color: var(--color-1);
-    border-radius: 20px;
+    border-radius: 5px;
     gap: 10px;
     text-decoration: none;
     color: var(--text-dark-pri);
@@ -216,5 +217,25 @@
 
     .menu_wrapper{
         display: none;
+    }
+}
+    
+@media (max-width:700px){
+    .nav_title{
+        font-size: 20px;
+    }
+
+    .nav_logo{
+        width: 100px;
+    }
+}
+
+@media (max-width:490px){
+    .nav_title span{
+        display: none;
+    }
+
+    .nav_logo{
+        width: 80px;
     }
 }

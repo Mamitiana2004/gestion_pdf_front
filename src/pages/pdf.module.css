@@ -46,6 +46,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .pdf_container{
@@ -286,4 +287,74 @@
 }
 .liste_produit span::before{
     content: "- ";
+}
+
+
+
+@media (max-width:1540px){
+    .container{
+        padding: 30px 50px;
+    }
+}
+
+@media (max-width:1350px){
+    .pdf_container{
+        width: 500px;
+    }
+}
+
+@media (max-width:1150px){
+    .pdf_container{
+        width: 400px;
+    }
+
+    .pdf_donnee_header_title{
+        font-size: 20px;
+    }
+}
+
+@media (max-width:950px){
+    .pdf_container{
+        width: 100%;
+    }
+}
+
+@media (max-width:850px){
+    .toolbar_left{
+        flex-direction: column;
+        width: 400px;
+    }
+    .dropdown_filter_name{
+        width: 400px;
+    }
+
+    .button_import{
+        width: 400px;
+    }
+}
+
+@media (max-width:650px){
+
+    .container{
+        padding: 20px;
+    }
+
+    .pdf_donnee_detail_item{
+        width:100%;
+    }
+}
+
+@media (max-width:490px){
+
+    .toolbar_left{
+        flex-direction: column;
+        width: 100%;
+    }
+    .dropdown_filter_name{
+        width: 100%;
+    }
+    
+    .button_import{
+        width: 100%;
+    }
 }

@@ -9,7 +9,7 @@ export default function Topbar(props) {
 
     const navigate = useNavigate();
 
-    const [visible,setVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const handleLogOut = () => {
         localStorage.removeItem("token_user");
@@ -23,7 +23,9 @@ export default function Topbar(props) {
                     <div className={style.menu_link}>
                         <span className={style.nav_title}>
                             <img className={style.nav_logo} src='/assets/images/logo.png' alt='logo' />
-                            Manifest
+                            <span>
+                                Manifest
+                            </span>
                         </span>
                     </div>
                     <div className={style.menu_wrapper}>
@@ -48,10 +50,10 @@ export default function Topbar(props) {
                             <span>Deconnecion</span>
                         </div>
                     </div>
-                    <Button onClick={()=>setVisible(true)} icon="pi pi-align-right" className={style.btn_menu} />
+                    <Button onClick={() => setVisible(true)} icon="pi pi-align-right" className={style.btn_menu} />
                 </div>
             </div>
-            <Sidebar visible={visible} onHide={()=>setVisible(false)} position='right'>
+            <Sidebar visible={visible} onHide={() => setVisible(false)} position='right'>
                 <div className={style.sidebar_container}>
                     <span className={style.sidebar_title}>Manifest</span>
                     <div className={style.sidebar_link_container}>
@@ -63,7 +65,7 @@ export default function Topbar(props) {
                             <i className='pi pi-user' />
                             <span>Utilisateur</span>
                         </a>
-                        
+
                         <a className={props.name !== "resume" ? style.sidebar_nav_link : style.sidebar_nav_link_active} href='/admin/resume'>
                             <i className='pi pi-database' />
                             <span>Donnée</span>
