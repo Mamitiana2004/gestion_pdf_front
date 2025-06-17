@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { Button } from 'primereact/button';
+import { Column } from 'primereact/column';
+import { DataTable } from 'primereact/datatable';
+import { Toolbar } from 'primereact/toolbar';
+import { useState } from "react";
 import usePageTitle from "../hooks/usePageTitle";
 import Sidebar from "../layouts/Sidebar";
 import Topbar from "../layouts/Topbar";
-import { Toolbar } from 'primereact/toolbar';
-import { Button } from 'primereact/button';
 import style from './home.module.css';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
 
-import vessel from './data/vessel.json'
+import vessel from './data/vessel.json';
 
-import { Dialog } from "primereact/dialog";
 import { confirmDialog, ConfirmDialog } from "primereact/confirmdialog";
+import { Dialog } from "primereact/dialog";
 
 export default function Voyage() {
     usePageTitle("Voyage")
@@ -25,13 +25,13 @@ export default function Voyage() {
         }
     }
 
-   
 
 
 
 
-    const [name,setName]= useState();
-    const [adresse,setAdresse] = useState();
+
+    const [name, setName] = useState();
+    const [adresse, setAdresse] = useState();
 
     const [visibleNew, setVisibleNew] = useState(false);
     const [selectedUser, setSelectedUser] = useState(null);
@@ -169,8 +169,8 @@ export default function Voyage() {
 
             <Dialog style={{ width: '60vw' }} header="Ajouter un nouveau manifest" visible={visibleNew} onHide={() => setVisibleNew(false)}>
                 <form onSubmit={sendData}>
-                    <p>Name : <input type="text" value={name} onChange={(e)=>setName(e.target.value)} /></p>
-                    <p>Adresse : <input type="text" value={adresse} onChange={(e)=>setAdresse(e.target.value)} /></p>
+                    <p>Name : <input type="text" value={name} onChange={(e) => setName(e.target.value)} /></p>
+                    <p>Adresse : <input type="text" value={adresse} onChange={(e) => setAdresse(e.target.value)} /></p>
                     <button type="submit">Valider</button>
                 </form>
 
